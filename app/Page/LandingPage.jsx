@@ -23,12 +23,13 @@ import {
   ArrowRight,
 } from "lucide-react";
 import Image from "next/image";
+import HalfCircleGradient from "@/components/HalfCircleGradient";
 
 export default function EnhancedLandingPage() {
   const [activeTab, setActiveTab] = useState("influencers");
 
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+    <div className="min-h-screen px-4 bg-black text-white relative overflow-hidden">
       <SvgPattern />
       <div className="relative z-10">
         <Header />
@@ -75,6 +76,8 @@ export default function EnhancedLandingPage() {
                 width={800}
               />
             </motion.div>
+
+            <HalfCircleGradient position="top" />
           </section>
           <section className="container mx-auto px-4 py-12 bg-transparent">
             <h2 className="text-4xl font-bold mb-12 text-center">
@@ -82,7 +85,7 @@ export default function EnhancedLandingPage() {
             </h2>
             <LogoMarquee />
           </section>
-          <section className="container mx-auto px-4 py-12">
+          <section className="container mx-auto mb-12 px-4 py-12">
             <h2 className="text-4xl font-bold mb-12 text-center">
               How It Works
             </h2>
@@ -113,11 +116,11 @@ export default function EnhancedLandingPage() {
 
                 <div className="md:w-3/5 mx-6 h-full  mt-8 md:mt-0 flex items-center justify-center">
                   <video
-                    src="https://videos.pexels.com/video-files/8113145/8113145-sd_360_640_30fps.mp4"
+                    src="https://videos.pexels.com/video-files/8113093/8113093-hd_1080_1920_30fps.mp4"
                     autoPlay
                     loop
                     muted
-                    className="w-[76vh] h-4/5 object-cover rounded-lg shadow-lg"
+                    className="w-[79vh] h-4/5 object-cover rounded-lg shadow-lg"
                   />
                 </div>
               </div>
@@ -129,7 +132,7 @@ export default function EnhancedLandingPage() {
               onValueChange={setActiveTab}
               className="w-full"
             >
-              <TabsList className="flex space-x-4 mb-12 w-max justify-center mx-auto bg-transparent ">
+              <TabsList className="flex space-x-4 mb-12 w-max transition-transform justify-center mx-auto bg-transparent ">
                 <TabsTrigger
                   value="influencers"
                   className={` text-lg ${

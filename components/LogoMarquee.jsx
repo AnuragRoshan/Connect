@@ -32,7 +32,7 @@ const logos = [
 export function LogoMarquee() {
   return (
     <div className="relative flex items-center justify-center ">
-      <div className="mt-14 sm:mt-24 mb-10 relative flex mx-auto w-[80vw] sm:w-[75vw]  items-center justify-center overflow-hidden  ">
+      <div className="mt-14 rounded-xl sm:mt-24 mb-10 relative flex mx-auto w-[80vw] sm:w-[75vw]  items-center justify-center overflow-hidden  ">
         <Marquee className="[--duration:20s]">
           {logos.map((logo) => (
             <div key={logo.alt} className="px-4 flex items-center">
@@ -45,8 +45,8 @@ export function LogoMarquee() {
             </div>
           ))}
         </Marquee>
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r  dark:from-neutral-950"></div>
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l  dark:from-neutral-950"></div>
+        <div className=" rounded-lg pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r  from-black"></div>
+        <div className="rounded-lg pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l  from-black"></div>
       </div>
     </div>
   );
