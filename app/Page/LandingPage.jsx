@@ -347,9 +347,9 @@ export default function EnhancedLandingPage() {
               <GlassCard>
                 <div className="p-8">
                   <p className="text-xl mb-6">
-                    "InfluenceConnect has been a game-changer for my influencer
+                    `InfluenceConnect has been a game-changer for my influencer
                     career. The opportunities and connections I've made are
-                    invaluable!"
+                    invaluable!`
                   </p>
                   <div className="flex items-center">
                     <Image
@@ -369,9 +369,9 @@ export default function EnhancedLandingPage() {
               <GlassCard>
                 <div className="p-8">
                   <p className="text-xl mb-6">
-                    "As a small business, finding the right influencers was
+                    `As a small business, finding the right influencers was
                     always a challenge. InfluenceConnect made it easy and
-                    effective."
+                    effective.`
                   </p>
                   <div className="flex items-center">
                     <Image

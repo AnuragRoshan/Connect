@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 // MovingLogos.js
 const MovingLogos = ({ direction = "left", speed = 20 }) => {
   const logos = [
