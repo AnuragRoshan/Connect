@@ -28,9 +28,9 @@ export default function EnhancedLandingPage() {
   const [activeTab, setActiveTab] = useState("influencers");
 
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+    <div className="min-h-screen bg-black text-white relative overflow-hidden px-10">
       <SvgPattern />
-      <div className="relative z-10">
+      <div className="">
         <Header />
 
         <main className="container mx-auto px-4">
@@ -134,8 +134,8 @@ export default function EnhancedLandingPage() {
                   value="influencers"
                   className={` text-lg ${
                     activeTab === "influencers"
-                      ? "bg-gray-800 text-yellow-400 font-semibold"
-                      : " font-medium"
+                      ? "bg-white text-white font-bold"
+                      : " font-thin  "
                   }`}
                 >
                   For Influencers
@@ -144,8 +144,8 @@ export default function EnhancedLandingPage() {
                   value="businesses"
                   className={` text-lg ${
                     activeTab === "businesses"
-                      ? "bg-gray-800 text-yellow-400 font-semibold"
-                      : " font-medium"
+                      ? "bg-white text-yellow-400 font-semibold"
+                      : " font-medium "
                   }`}
                 >
                   For Businesses
