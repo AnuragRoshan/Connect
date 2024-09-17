@@ -2,12 +2,9 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react"; // Assuming you're using Lucide React icons
 import { Button } from "@/components/ui/button";
-import { useTheme } from "next-themes";
-import { Sun, Moon } from "lucide-react"; // or your preferred icon library
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     // Disable scroll when menu is open

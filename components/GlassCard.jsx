@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Card, CardContent } from "./ui/card";
-import { Instagram, Twitter } from "lucide-react";
 
 const GlassCard = ({ children, className = "" }) => {
   const controls = useAnimation();

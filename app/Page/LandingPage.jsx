@@ -1,6 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
-import { motion, useAnimation } from "framer-motion";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,10 +11,8 @@ import ProfileCard from "@/components/ProfileCard";
 import StepCard from "@/components/StepCard";
 import FeatureCard from "@/components/FeatureCard";
 import SvgPattern from "@/components/SvgPattern";
-import MovingLogos from "@/components/MovingLogos";
 import { LogoMarquee } from "@/components/LogoMarquee";
 import { Facebook } from "lucide-react";
-import { Mail } from "lucide-react";
 import {
   Instagram,
   Twitter,
@@ -24,8 +22,6 @@ import {
   Users,
   ArrowRight,
 } from "lucide-react";
-import HalfCircleGradient from "@/components/HalfCircleGradient";
-import Image from "next/image";
 
 export default function EnhancedLandingPage() {
   const [activeTab, setActiveTab] = useState("influencers");
