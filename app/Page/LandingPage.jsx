@@ -13,7 +13,8 @@ import FeatureCard from "@/components/FeatureCard";
 import SvgPattern from "@/components/SvgPattern";
 import MovingLogos from "@/components/MovingLogos";
 import { LogoMarquee } from "@/components/LogoMarquee";
-
+import { Facebook } from "lucide-react";
+import { Mail } from "lucide-react";
 import {
   Instagram,
   Twitter,
@@ -36,7 +37,7 @@ export default function EnhancedLandingPage() {
         <Header />
 
         <main className="container mx-auto px-4">
-          <section className="flex flex-col md:flex-row items-center mb-24">
+          <section className="flex flex-col h-[90vh] md:flex-row items-center mb-12">
             <motion.div
               className="md:w-1/2 mb-8 md:mb-0"
               initial={{ opacity: 0, x: -20 }}
@@ -76,15 +77,12 @@ export default function EnhancedLandingPage() {
               />
             </motion.div>
           </section>
-
           <section className="container mx-auto px-4 py-12 bg-transparent">
             <h2 className="text-4xl font-bold mb-12 text-center">
               Trusted by Leading Brands
             </h2>
             <LogoMarquee />
-            <LogoMarquee />
           </section>
-
           <section className="container mx-auto px-4 py-12">
             <h2 className="text-4xl font-bold mb-12 text-center">
               How It Works
@@ -126,8 +124,7 @@ export default function EnhancedLandingPage() {
               </div>
             </div>
           </section>
-
-          <section className="mb-24">
+          <section className="mb-24 max-h-60vh min-h-60vh">
             <Tabs
               value={activeTab}
               onValueChange={setActiveTab}
@@ -195,9 +192,8 @@ export default function EnhancedLandingPage() {
               </TabsContent>
             </Tabs>
           </section>
-
-          <section className="mb-24">
-            <h2 className="text-4xl font-bold mb-12 text-center">
+          <section className="mb-10">
+            <h2 className="text-4xl font-bold mb-10 text-center">
               Featured{" "}
               {activeTab === "influencers" ? "Influencers" : "Businesses"}
             </h2>
@@ -207,7 +203,7 @@ export default function EnhancedLandingPage() {
                   <ProfileCard
                     name="Alex Johnson"
                     role="Lifestyle Influencer"
-                    image="/placeholder.svg?height=400&width=300&text=AJ"
+                    image="https://plus.unsplash.com/premium_photo-1689551670902-19b441a6afde?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww"
                     socialLinks={[
                       { icon: <Instagram className="w-6 h-6" />, url: "#" },
                       { icon: <Twitter className="w-6 h-6" />, url: "#" },
@@ -217,7 +213,7 @@ export default function EnhancedLandingPage() {
                   <ProfileCard
                     name="Sarah Lee"
                     role="Tech Reviewer"
-                    image="/placeholder.svg?height=400&width=300&text=SL"
+                    image="https://plus.unsplash.com/premium_photo-1686777551229-d8eca134c66e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHJhbmRvbSUyMHBlb3BsZXxlbnwwfHwwfHx8MA%3D%3D"
                     socialLinks={[
                       { icon: <Youtube className="w-6 h-6" />, url: "#" },
                       { icon: <Twitter className="w-6 h-6" />, url: "#" },
@@ -226,7 +222,7 @@ export default function EnhancedLandingPage() {
                   <ProfileCard
                     name="Mike Chen"
                     role="Food Blogger"
-                    image="/placeholder.svg?height=400&width=300&text=MC"
+                    image="https://plus.unsplash.com/premium_photo-1664478383014-e8bc930be7c2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHJhbmRvbSUyMHBlb3BsZXxlbnwwfHwwfHx8MA%3D%3D"
                     socialLinks={[
                       { icon: <Instagram className="w-6 h-6" />, url: "#" },
                       { icon: <Youtube className="w-6 h-6" />, url: "#" },
@@ -273,9 +269,8 @@ export default function EnhancedLandingPage() {
               </Button>
             </div>
           </section>
-
           <section className="mb-24">
-            <div className="flex flex-col md:flex-row items-center bg-white rounded-2xl overflow-hidden shadow-lg">
+            <div className="flex flex-col md:flex-row items-center bg-gradient-to-br from-gray-200 to-gray-300 rounded-2xl overflow-hidden shadow-lg">
               <div className="md:w-1/2 p-12">
                 <h2 className="text-4xl font-bold mb-6 text-black">
                   Ready to Elevate Your Influence?
@@ -315,17 +310,36 @@ export default function EnhancedLandingPage() {
                     Sign Up Now
                   </Button>
                 </form>
+
+                {/* Social Login Buttons */}
+                <div className="flex flex-col space-y-4 mt-8">
+                  <Button
+                    variant="outline"
+                    className="flex w-max justify-center m-auto items-center justify-center space-x-2 border border-gray-300 text-black hover:bg-gray-100"
+                  >
+                    <Instagram className="w-6 h-6 text-gray-700" />
+                    <span>SignUp with Instagram</span>
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="flex w-max justify-center m-auto items-center justify-center space-x-2 border border-gray-300 text-black hover:bg-gray-100"
+                  >
+                    <Facebook className="w-6 h-6 text-gray-700" />
+                    <span>SignUp with Facebook</span>
+                  </Button>
+                </div>
               </div>
-              <div className="md:w-1/2">
-                <img
-                  src="/placeholder.svg?height=600&width=800&text=Join%20Now"
-                  alt="Join InfluenceConnect"
-                  className="w-full h-full object-cover"
+              <div className="md:w-1/2 m-4">
+                <video
+                  src="https://videos.pexels.com/video-files/4994326/4994326-sd_640_360_25fps.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  className="w-full h-96 object-cover rounded-lg shadow-lg"
                 />
               </div>
             </div>
           </section>
-
           <section className="mb-24">
             <h2 className="text-4xl font-bold mb-12 text-center">
               What Our Users Say
@@ -340,7 +354,7 @@ export default function EnhancedLandingPage() {
                   </p>
                   <div className="flex items-center">
                     <img
-                      src="/placeholder.svg?height=64&width=64&text=JD"
+                      src="https://images.unsplash.com/photo-1489980557514-251d61e3eeb6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cmFuZG9tJTIwbWFufGVufDB8fDB8fHww"
                       alt="Jane Doe"
                       className="w-16 h-16 rounded-full mr-4"
                     />
@@ -360,7 +374,7 @@ export default function EnhancedLandingPage() {
                   </p>
                   <div className="flex items-center">
                     <img
-                      src="/placeholder.svg?height=64&width=64&text=JS"
+                      src="https://images.unsplash.com/photo-1496345875659-11f7dd282d1d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tJTIwbWFufGVufDB8fDB8fHww"
                       alt="John Smith"
                       className="w-16 h-16 rounded-full mr-4"
                     />

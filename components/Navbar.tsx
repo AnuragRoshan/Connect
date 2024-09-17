@@ -31,7 +31,7 @@ const Header = () => {
           <Button variant="ghost">Pricing</Button>
           <Button variant="ghost">Contact</Button>
           <Button variant="outline">Sign Up</Button>
-          <Button
+          {/* <Button
             onClick={() => setTheme(theme === "dark" ? "dark" : "light")}
             className="text-lg"
           >
@@ -40,7 +40,7 @@ const Header = () => {
             ) : (
               <Sun className="w-6 h-6" />
             )}
-          </Button>
+          </Button> */}
         </div>
 
         {/* Mobile Menu Button */}
