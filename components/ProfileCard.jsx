@@ -1,6 +1,7 @@
 // ProfileCard.js
 import { motion } from "framer-motion";
 import { Card, CardContent } from "./ui/card";
+import Image from "next/image";
 
 const ProfileCard = ({ name, role, image, socialLinks }) => {
   return (
@@ -19,10 +20,12 @@ const ProfileCard = ({ name, role, image, socialLinks }) => {
               whileHover={{ scale: 1.1 }}
               transition={{ type: "spring", stiffness: 300, damping: 10 }}
             >
-              <img
+              <Image
                 src={image}
                 alt={name}
                 className="w-full h-full object-cover"
+                height={128}
+                width={128}
               />
             </motion.div>
             <motion.h3

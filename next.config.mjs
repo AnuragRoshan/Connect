@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['1000logos.net', 'seeklogo.com'], // Add other external domains as needed
+        domains: ['1000logos.net', 'seeklogo.com', 'plus.unsplash.com', 'images.unsplash.com'], // Add other external domains as needed
     },
 };
 

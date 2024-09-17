@@ -23,11 +23,13 @@ const MovingLogos = ({ direction = "left", speed = 20 }) => {
         }}
       >
         {[...logos, ...logos].map((logo, index) => (
-          <img
+          <Image
             key={index}
             src={logo}
             alt={`Brand ${index + 1}`}
             className="h-20 w-auto"
+            height={80}
+            width={120}
           />
         ))}
       </div>

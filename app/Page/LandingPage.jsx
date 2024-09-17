@@ -22,6 +22,7 @@ import {
   Users,
   ArrowRight,
 } from "lucide-react";
+import Image from "next/image";
 
 export default function EnhancedLandingPage() {
   const [activeTab, setActiveTab] = useState("influencers");
@@ -66,10 +67,12 @@ export default function EnhancedLandingPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1496147539180-13929f8aa03a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Modern Collaboration"
                 className="w-full h-auto rounded-lg shadow-2xl"
+                height={500}
+                width={800}
               />
             </motion.div>
           </section>
@@ -349,10 +352,12 @@ export default function EnhancedLandingPage() {
                     invaluable!"
                   </p>
                   <div className="flex items-center">
-                    <img
+                    <Image
                       src="https://images.unsplash.com/photo-1489980557514-251d61e3eeb6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cmFuZG9tJTIwbWFufGVufDB8fDB8fHww"
                       alt="Jane Doe"
                       className="w-16 h-16 rounded-full mr-4"
+                      height={64}
+                      width={64}
                     />
                     <div>
                       <h4 className="font-semibold">Jane Doe</h4>
@@ -369,10 +374,12 @@ export default function EnhancedLandingPage() {
                     effective."
                   </p>
                   <div className="flex items-center">
-                    <img
+                    <Image
                       src="https://images.unsplash.com/photo-1496345875659-11f7dd282d1d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tJTIwbWFufGVufDB8fDB8fHww"
                       alt="John Smith"
                       className="w-16 h-16 rounded-full mr-4"
+                      height={64}
+                      width={64}
                     />
                     <div>
                       <h4 className="font-semibold">John Smith</h4>
