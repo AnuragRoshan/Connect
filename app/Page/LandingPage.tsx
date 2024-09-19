@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
+
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -27,7 +29,10 @@ import HalfCircleGradient from "@/components/HalfCircleGradient";
 
 export default function EnhancedLandingPage() {
   const [activeTab, setActiveTab] = useState("influencers");
-
+  const router = useRouter();
+  const navigateTo = (path: string) => {
+    router.push(path);
+  };
   return (
     <div className="min-h-screen px-4 bg-black text-white relative overflow-hidden">
       <SvgPattern />
@@ -50,7 +55,11 @@ export default function EnhancedLandingPage() {
                 powerful partnerships and drive growth.
               </p>
               <div className="space-x-4">
-                <Button size="lg" className="text-lg px-8 py-6">
+                <Button
+                  onClick={() => navigateTo("/home")}
+                  size="lg"
+                  className="text-lg px-8 py-6"
+                >
                   Get Started
                 </Button>
                 <Button

@@ -1,7 +1,16 @@
 import Image from "next/image";
 import Marquee from "./ui/Marquee";
 
-const logos = [
+// Define the type for each logo object
+interface Logo {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+// Define the logos array with the correct type
+const logos: Logo[] = [
   {
     src: "https://1000logos.net/wp-content/uploads/2019/11/Hyatt-Logo-768x432.png",
     alt: "Microsoft",
@@ -29,10 +38,11 @@ const logos = [
   // Add more logos here
 ];
 
-export function LogoMarquee() {
+// Define the LogoMarquee component with proper type annotations
+export function LogoMarquee(): JSX.Element {
   return (
-    <div className="relative flex items-center justify-center ">
-      <div className="mt-14 rounded-xl sm:mt-24 mb-10 relative flex mx-auto w-[80vw] sm:w-[75vw]  items-center justify-center overflow-hidden  ">
+    <div className="relative flex items-center justify-center">
+      <div className="mt-14 rounded-xl sm:mt-24 mb-10 relative flex mx-auto w-[80vw] sm:w-[75vw] items-center justify-center overflow-hidden">
         <Marquee className="[--duration:20s]">
           {logos.map((logo) => (
             <div key={logo.alt} className="px-4 flex items-center">
@@ -45,8 +55,8 @@ export function LogoMarquee() {
             </div>
           ))}
         </Marquee>
-        <div className=" rounded-lg pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r  from-black"></div>
-        <div className="rounded-lg pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l  from-black"></div>
+        <div className="rounded-lg pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-black"></div>
+        <div className="rounded-lg pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-black"></div>
       </div>
     </div>
   );
