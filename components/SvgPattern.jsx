@@ -1,7 +1,7 @@
 // SvgPattern.js
 const SvgPattern = () => (
   <svg
-    className="absolute inset-0 w-full h-full"
+    className="absolute inset-0 w-full h-[100%] -z-100"
     xmlns="http://www.w3.org/2000/svg"
   >
     <defs>

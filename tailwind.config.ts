@@ -70,6 +70,15 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      scrollbar: {
+        hide: {
+          "::-webkit-scrollbar": {
+            display: "none",
+          } /* Chrome, Safari and Opera */,
+          "-ms-overflow-style": "none" /* IE and Edge */,
+          "scrollbar-width": "none" /* Firefox */,
+        },
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

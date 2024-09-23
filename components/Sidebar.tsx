@@ -3,6 +3,11 @@
 import { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  startTopLoading,
+  stopTopLoading,
+} from "@/redux/slices/Loader/topLoaderSlice";
 import {
   LogOut,
   Home,
@@ -14,11 +19,15 @@ import {
   Menu,
   CirclePlus,
 } from "lucide-react";
+import { selectTopLoaderStatus } from "@/redux/slices/Loader/topLoaderSlice";
 
 export default function Sidebar() {
   const [isMenuExpanded, setIsMenuExpanded] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+  const dispatch = useDispatch();
+
+  const isTopLoading = useSelector(selectTopLoaderStatus);
 
   const toggleMenu = () => {
     setIsMenuExpanded(!isMenuExpanded);
@@ -40,22 +49,24 @@ export default function Sidebar() {
   ];
 
   const navigateTo = (path: string) => {
-    router.push(path);
+    dispatch(startTopLoading()); // Start loading
+    console.log("Is loading before navigation:", isTopLoading);
+
+    setTimeout(() => {
+      router.push(path);
+      dispatch(stopTopLoading()); // Stop loading
+      console.log("Is loading after navigation:", isTopLoading);
+    }, 2000);
   };
 
   return (
     <aside
       className={`${
-        isMenuExpanded ? "w-64" : "w-16"
-      } bg-gradient-to-b from-gray-900 to-gray-950 border-r border-gray-800 transition-all duration-300 ease-in-out`}
+        isMenuExpanded ? "w-60" : "w-16"
+      } z-10 bg-gradient-to-b from-gray-900 opacity-80 to-gray-950 border-r border-gray-800 transition-all duration-400 ease-in-out`}
     >
       <div className="p-4 flex items-center">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={toggleMenu}
-          className="mr-2"
-        >
+        <Button size="icon" onClick={toggleMenu} className="mr-2">
           <Menu className="h-6 w-6" />
         </Button>
         {isMenuExpanded && (
@@ -85,13 +96,11 @@ export default function Sidebar() {
           </button>
         ))}
       </nav>
-      <div
-        className={`absolute bottom-0 ${isMenuExpanded ? "w-64" : "w-16"} p-4`}
-      >
+      <div className={`absolute bottom-0 p-4`}>
         <Button
           variant="outline"
           onClick={() => navigateTo("/logout")}
-          className={`w-full bg-gradient-to-r from-gray-800 to-gray-700 text-gray-300 hover:from-gray-700 hover:to-gray-600 border-gray-600 ${
+          className={`w-full bg-gradient-to-r from-gray-800 to-gray-700 text-white border-gray-600 ${
             !isMenuExpanded && "p-2"
           }`}
         >

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Sidebar from "@/components/Sidebar";
+import SvgPattern from "@/components/SvgPattern";
 
 export default function NotificationPage() {
   const notifications = [
@@ -53,12 +54,20 @@ export default function NotificationPage() {
       unread: false,
       icon: User,
     },
+    {
+      id: 5,
+      avatar: "/placeholder.svg?height=40&width=40",
+      name: "Ethan Hunt",
+      action: "started following you",
+      time: "2 days ago",
+      unread: false,
+      icon: User,
+    },
   ];
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-gray-900 to-black text-gray-100">
-      {/* Left-side menu bar */}
-      <Sidebar />
+    <div className="flex h-screen bg-black text-gray-100">
+      <SvgPattern />
       {/* Main content area */}
       <main className="flex-1 p-6 overflow-hidden">
         <div className="flex justify-between items-center mb-6">
@@ -79,7 +88,7 @@ export default function NotificationPage() {
                 key={notification.id}
                 className={`${
                   notification.unread ? "bg-gray-800" : "bg-black"
-                } border-gray-700 hover:bg-gray-800 transition-colors duration-200`}
+                } border-gray-700 cursor-pointer hover:bg-gray-800 transition-colors duration-200`}
               >
                 <CardContent className="p-4 flex items-center space-x-4">
                   <Avatar className="w-12 h-12 border-2 border-gray-600">

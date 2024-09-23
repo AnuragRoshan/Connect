@@ -1,5 +1,7 @@
 import Sidebar from "@/components/Sidebar";
 import MainContent from "@/components/HomeMainContent";
+import SvgPattern from "@/components/SvgPattern";
+import RightSidebar from "@/components/RightSidebar";
 
 const ads = [
   {
@@ -7,7 +9,7 @@ const ads = [
     company: "EcoStyle",
     avatar: "/placeholder.svg?height=40&width=40",
     description:
-      "Seeking influencers passionate about sustainable fashion to promote our new eco-friendly clothing line.",
+      "Seeking influencers passionate about sustainable fashion to promote our new eco-friendly clothing line. akjfaiofi aifjaoi jfioa jio fia sfio hasiof ioa hfia hsif haoh foaha fio haio fh aij do fia hfio haiofiao hfha ofiah fiah ifo haif hia hfoiah foa hiof hoif hioa hfiha ifhiahfiahfahsf haisofhai shfiohah ia hfi hai fia fi hasif hi shfi hi",
     budget: "$1000-$2000",
     category: "Fashion",
     followers: "10k+",
@@ -66,9 +68,10 @@ const ads = [
 
 export default function Component() {
   return (
-    <div className="flex h-screen bg-black text-gray-100">
-      <Sidebar />
+    <div className="flex h-screen overflow-y-scroll bg-black text-gray-100 px-4 py-2">
+      <SvgPattern />
       <MainContent ads={ads} />
+      <RightSidebar />
     </div>
   );
 }

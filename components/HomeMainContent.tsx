@@ -20,14 +20,12 @@ interface MainContentProps {
 
 export default function MainContent({ ads }: MainContentProps) {
   return (
-    <main className="flex-1 p-6 overflow-auto">
-      <ScrollArea className=" w-3/5">
-        <div className="space-y-6">
-          {ads.map((ad) => (
-            <AdvertisementCard key={ad.id} ad={ad} />
-          ))}
-        </div>
-      </ScrollArea>
+    <main className="flex pr-4  w-[100%]">
+      <div className="space-y-6 h-max">
+        {ads.map((ad) => (
+          <AdvertisementCard key={ad.id} ad={ad} />
+        ))}
+      </div>
     </main>
   );
 }
