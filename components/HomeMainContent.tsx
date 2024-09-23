@@ -1,4 +1,3 @@
-import { ScrollArea } from "@/components/ui/scroll-area";
 import AdvertisementCard from "./AdvertisementCard";
 
 // Define the type for the ad object

@@ -4,7 +4,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import Sidebar from "@/components/Sidebar";
 import SvgPattern from "@/components/SvgPattern";
 
 export default function NotificationPage() {

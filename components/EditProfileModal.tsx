@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { X, Plus, Minus } from "lucide-react";
+import { motion  } from "framer-motion";
+import { X, Plus } from "lucide-react";
 
 interface SocialMediaStats {
   instagram?: { followers: number; engagement_rate: number };
@@ -263,7 +263,7 @@ const EditProfileModal: React.FC<{
                     {platform}
                   </h4>
                   <div className="grid grid-cols-2 gap-4">
-                    {Object.entries(stats).map(([stat, value]) => (
+                    {Object.entries(stats).map(([stat, ]) => (
                       <div key={stat}>
                         <label
                           htmlFor={`${platform}-${stat}`}
@@ -274,7 +274,7 @@ const EditProfileModal: React.FC<{
                         <input
                           type="number"
                           id={`${platform}-${stat}`}
-                          value={value} // Use the actual value from the state
+                          value={"value"} // Use the actual value from the state
                           onChange={(e) =>
                             handleSocialMediaStatsChange(
                               platform,
@@ -302,7 +302,7 @@ const EditProfileModal: React.FC<{
                     {platform}
                   </h4>
                   <div className="grid grid-cols-2 gap-4">
-                    {Object.entries(rates).map(([rate, value]) => (
+                    {Object.entries(rates).map(([rate, ]) => (
                       <div key={rate}>
                         <label
                           htmlFor={`${platform}-${rate}`}
@@ -313,7 +313,7 @@ const EditProfileModal: React.FC<{
                         <input
                           type="number"
                           id={`${platform}-${rate}`}
-                          value={value} // Use the actual value from the state
+                          value={"value"} // Use the actual value from the state
                           onChange={(e) =>
                             handleRateCardChange(
                               platform,

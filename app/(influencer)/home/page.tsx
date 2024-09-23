@@ -1,4 +1,3 @@
-import Sidebar from "@/components/Sidebar";
 import MainContent from "@/components/HomeMainContent";
 import SvgPattern from "@/components/SvgPattern";
 import RightSidebar from "@/components/RightSidebar";
