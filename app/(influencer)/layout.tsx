@@ -2,9 +2,9 @@
 import type { Metadata } from "next";
 import "../globals.css";
 import SearchBar from "@/components/SearchBar";
-import Sidebar from "@/components/Sidebar";
 import { ReduxProvider } from "../providers/redux-providers";
 import TopLoader from "@/components/TopLoader";
+import SvgPattern from "@/components/SvgPattern";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,15 +17,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="overflow-hidden">
-      <body className="antialiased h-screen">
+    <html lang="en" className="overflow-y-scroll">
+      <body className="antialiased min-h-screen flex flex-col relative bg-black">
         <ReduxProvider>
+          <div className="fixed inset-0 z-0">
+            <SvgPattern />
+          </div>
           <TopLoader />
-          <div className="flex h-full w-full">
-            <Sidebar />
-            <div className="flex-1 flex flex-col bg-gray-950">
+          <div className="flex flex-1 w-full relative z-10">
+            <div className="flex-1 flex flex-col">
               <SearchBar />
-              <div className="flex-1 overflow-y-hidden">{children}</div>
+              <div className="flex-1">{children}</div>
             </div>
           </div>
         </ReduxProvider>

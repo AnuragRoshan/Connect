@@ -65,8 +65,8 @@ export default function NotificationPage() {
   ];
 
   return (
-    <div className="flex h-screen bg-black text-gray-100">
-      <SvgPattern />
+    <div className="flex h-screen text-gray-100">
+      {/* <SvgPattern /> */}
       {/* Main content area */}
       <main className="flex-1 p-6 overflow-hidden">
         <div className="flex justify-between items-center mb-6">

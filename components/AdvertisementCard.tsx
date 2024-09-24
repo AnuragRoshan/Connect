@@ -12,7 +12,13 @@ import {
 } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { ThumbsUp, MessageCircle, Share2, UserRoundPlus } from "lucide-react";
+import {
+  ThumbsUp,
+  MessageCircle,
+  Share2,
+  UserRoundPlus,
+  Bookmark,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface Ad {
@@ -33,9 +39,14 @@ interface AdvertisementCardProps {
 export default function AdvertisementCard({ ad }: AdvertisementCardProps) {
   const [isLiked, setIsLiked] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
 
   const handleLikeClick = () => {
     setIsLiked(!isLiked);
+  };
+
+  const handleSaveClick = () => {
+    setIsSaved(!isSaved);
   };
 
   return (
@@ -144,6 +155,25 @@ export default function AdvertisementCard({ ad }: AdvertisementCardProps) {
           >
             <MessageCircle className="w-5 h-5 mr-2" />
             <span className="font-semibold">Contact</span>
+          </Button>
+
+          <Button
+            variant="ghost"
+            onClick={handleSaveClick}
+            className="text-gray-400 hover:text-purple-400 hover:bg-transparent transition-colors duration-300"
+          >
+            <motion.div
+              whileTap={{ scale: 0.8 }}
+              animate={{ scale: isSaved ? 1.2 : 1 }}
+              transition={{ type: "spring", stiffness: 300, damping: 10 }}
+            >
+              <Bookmark
+                className="w-5 h-5 mr-2"
+                stroke={isSaved ? "rgb(192, 132, 252)" : "currentColor"}
+                fill={isSaved ? "rgb(192, 132, 252)" : "none"}
+              />
+            </motion.div>
+            <span className="font-semibold">Save</span>
           </Button>
 
           <Button

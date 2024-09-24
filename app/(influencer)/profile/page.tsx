@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Instagram,
@@ -136,157 +136,155 @@ const InfluencerProfile: React.FC = () => {
 
   return (
     <div>
-      <SvgPattern />
-      <ScrollArea className="max-h-[85vh] overflow-y-auto">
-        <div className="min-h-screen bg-gray-900 text-gray-100 p-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="max-w-6xl mx-auto bg-gray-800 rounded-2xl shadow-2xl overflow-hidden relative"
+      {/* <SvgPattern /> */}
+      <div className="min-h-screen text-gray-100 p-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="max-w-6xl mx-auto bg-gray-800 rounded-2xl shadow-2xl overflow-hidden relative"
+        >
+          <button
+            onClick={handleEditClick} // Open modal on click
+            className="absolute top-4 right-4 text-gray-400 hover:text-white"
           >
-            <button
-              onClick={handleEditClick} // Open modal on click
-              className="absolute top-4 right-4 text-gray-400 hover:text-white"
-            >
-              <Edit3 />
-            </button>
+            <Edit3 />
+          </button>
 
-            <div className="bg-gray-700 p-8 flex flex-col md:flex-row items-center">
-              <div className=" relative md:mr-8 mb-4 md:mb-0">
-                <img
-                  className=" h-48 w-48 rounded-full object-cover border-4 border-white shadow-lg"
-                  src={influencer.profile_image}
-                  alt={influencer.name}
-                />
-              </div>
-              <div className="text-center md:text-left">
-                <div className="flex flex-wrap gap-2 mb-2">
-                  {influencer.category.map((cat, index) => (
-                    <span
-                      key={index}
-                      className="px-3 py-1 bg-purple-600 rounded-full text-sm font-semibold text-white"
-                    >
-                      {cat}
-                    </span>
-                  ))}
-                </div>
-                <motion.h1
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.2, duration: 0.5 }}
-                  className="text-4xl font-bold text-white mb-2"
-                >
-                  {influencer.name}
-                </motion.h1>
-                <p className="text-gray-300 mb-4">
-                  <MapPin className="inline-block mr-2" size={16} />
-                  {influencer.location}
-                </p>
-                <p className="text-gray-300 max-w-lg">{influencer.bio}</p>
-              </div>
+          <div className="bg-gray-700 p-8 flex flex-col md:flex-row items-center">
+            <div className=" relative md:mr-8 mb-4 md:mb-0">
+              <img
+                className=" h-48 w-48 rounded-full object-cover border-4 border-white shadow-lg"
+                src={influencer.profile_image}
+                alt={influencer.name}
+              />
             </div>
-
-            {/* About Section */}
-            <div className="px-8 py-6 bg-gray-750">
-              <h2 className="text-2xl font-semibold text-white mb-4">About</h2>
-              <p className="text-gray-300 p-4 bg-gray-700 rounded-md">
-                {displayedText}
-                {influencer.about.length > 450 && (
-                  <>
-                    {!showMore && "... "}
-                    <button
-                      onClick={() => setShowMore(!showMore)}
-                      className="text-blue-500 hover:underline focus:outline-none"
-                    >
-                      {showMore ? "Show Less" : "Show More"}
-                    </button>
-                  </>
-                )}
+            <div className="text-center md:text-left">
+              <div className="flex flex-wrap gap-2 mb-2">
+                {influencer.category.map((cat, index) => (
+                  <span
+                    key={index}
+                    className="px-3 py-1 bg-purple-600 rounded-full text-sm font-semibold text-white"
+                  >
+                    {cat}
+                  </span>
+                ))}
+              </div>
+              <motion.h1
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+                className="text-4xl font-bold text-white mb-2"
+              >
+                {influencer.name}
+              </motion.h1>
+              <p className="text-gray-300 mb-4">
+                <MapPin className="inline-block mr-2" size={16} />
+                {influencer.location}
               </p>
+              <p className="text-gray-300 max-w-lg">{influencer.bio}</p>
             </div>
+          </div>
 
-            {/* Social Media Stats */}
+          {/* About Section */}
+          <div className="px-8 py-6 bg-gray-750">
+            <h2 className="text-2xl font-semibold text-white mb-4">About</h2>
+            <p className="text-gray-300 p-4 bg-gray-700 rounded-md">
+              {displayedText}
+              {influencer.about.length > 450 && (
+                <>
+                  {!showMore && "... "}
+                  <button
+                    onClick={() => setShowMore(!showMore)}
+                    className="text-blue-500 hover:underline focus:outline-none"
+                  >
+                    {showMore ? "Show Less" : "Show More"}
+                  </button>
+                </>
+              )}
+            </p>
+          </div>
+
+          {/* Social Media Stats */}
+          <div className="px-8 py-6 bg-gray-750">
+            <h2 className="text-2xl font-semibold text-white mb-4 flex  items-center">
+              <User className="mr-2 text-purple-400" />
+              Social Media Stats
+            </h2>
+            <div className="flex flex-row flex-wrap gap-4">
+              <SocialMediaCard
+                platform="Instagram"
+                icon={<Instagram className="text-pink-400" />}
+                stats={influencer.social_media_stats.instagram || {}}
+              />
+              <SocialMediaCard
+                platform="YouTube"
+                icon={<Youtube className="text-red-500" />}
+                stats={influencer.social_media_stats.youtube || {}}
+              />
+              <SocialMediaCard
+                platform="Twitter"
+                icon={<Twitter className="text-blue-400" />}
+                stats={influencer.social_media_stats.twitter || {}}
+              />
+              <SocialMediaCard
+                platform="LinkedIn"
+                icon={<Linkedin className="text-blue-600" />}
+                stats={influencer.social_media_stats.linkedin || {}}
+              />
+              <SocialMediaCard
+                platform="Facebook"
+                icon={<Facebook className="text-blue-500" />}
+                stats={influencer.social_media_stats.facebook || {}}
+              />
+            </div>
+          </div>
+
+          {/* Rate Cards */}
+          <div className="px-8 py-6">
+            <h2 className="text-2xl font-semibold text-white mb-4 flex items-center">
+              <DollarSign className="mr-2 text-green-400" />
+              Rate Cards
+            </h2>
+            <div className="overflow-x-auto">
+              <div className="flex flex-row flex-wrap gap-4 pb-4">
+                {Object.entries(influencer.rate_cards).map(
+                  ([platform, rates]) => (
+                    <RateCard
+                      key={platform}
+                      platform={platform}
+                      rates={rates}
+                    />
+                  )
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Portfolio */}
+          {influencer.portfolio && (
             <div className="px-8 py-6 bg-gray-750">
-              <h2 className="text-2xl font-semibold text-white mb-4 flex  items-center">
-                <User className="mr-2 text-purple-400" />
-                Social Media Stats
-              </h2>
-              <div className="flex flex-row flex-wrap gap-4">
-                <SocialMediaCard
-                  platform="Instagram"
-                  icon={<Instagram className="text-pink-400" />}
-                  stats={influencer.social_media_stats.instagram || {}}
-                />
-                <SocialMediaCard
-                  platform="YouTube"
-                  icon={<Youtube className="text-red-500" />}
-                  stats={influencer.social_media_stats.youtube || {}}
-                />
-                <SocialMediaCard
-                  platform="Twitter"
-                  icon={<Twitter className="text-blue-400" />}
-                  stats={influencer.social_media_stats.twitter || {}}
-                />
-                <SocialMediaCard
-                  platform="LinkedIn"
-                  icon={<Linkedin className="text-blue-600" />}
-                  stats={influencer.social_media_stats.linkedin || {}}
-                />
-                <SocialMediaCard
-                  platform="Facebook"
-                  icon={<Facebook className="text-blue-500" />}
-                  stats={influencer.social_media_stats.facebook || {}}
-                />
-              </div>
-            </div>
-
-            {/* Rate Cards */}
-            <div className="px-8 py-6">
               <h2 className="text-2xl font-semibold text-white mb-4 flex items-center">
-                <DollarSign className="mr-2 text-green-400" />
-                Rate Cards
+                <Briefcase className="mr-2 text-yellow-400" />
+                Portfolio
               </h2>
-              <div className="overflow-x-auto">
-                <div className="flex flex-row flex-wrap gap-4 pb-4">
-                  {Object.entries(influencer.rate_cards).map(
-                    ([platform, rates]) => (
-                      <RateCard
-                        key={platform}
-                        platform={platform}
-                        rates={rates}
-                      />
-                    )
-                  )}
-                </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                {influencer.portfolio.map((item, index) => (
+                  <PortfolioItem key={index} item={item} />
+                ))}
               </div>
             </div>
-
-            {/* Portfolio */}
-            {influencer.portfolio && (
-              <div className="px-8 py-6 bg-gray-750">
-                <h2 className="text-2xl font-semibold text-white mb-4 flex items-center">
-                  <Briefcase className="mr-2 text-yellow-400" />
-                  Portfolio
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                  {influencer.portfolio.map((item, index) => (
-                    <PortfolioItem key={index} item={item} />
-                  ))}
-                </div>
-              </div>
-            )}
-          </motion.div>
-        </div>
-        {/* Modal for editing the profile */}
-        {isModalOpen && (
-          <EditProfileModal
-            influencer={influencer} // Pass the influencer data
-            onClose={closeModal} // Pass the onClose handler
-            onSave={handleSave} // Pass the onSave handler
-          />
-        )}
-      </ScrollArea>
+          )}
+        </motion.div>
+      </div>
+      {/* Modal for editing the profile */}
+      {isModalOpen && (
+        <EditProfileModal
+          influencer={influencer} // Pass the influencer data
+          onClose={closeModal} // Pass the onClose handler
+          onSave={handleSave} // Pass the onSave handler
+        />
+      )}
     </div>
   );
 };

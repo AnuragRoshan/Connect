@@ -1,0 +1,20 @@
+{
+  "entry": ["pages/**/*.tsx", "components/**/*.tsx", "app/**/*.tsx"],
+  "ignore": [
+    "node_modules/**",
+    ".next/**",
+    "public/**",
+    "types/**/*.ts",
+    "tests/**/*.test.tsx",
+    "**/*.config.ts",
+    "scripts/**"
+  ],
+  "ignoreBinaries": ["next", "react", "typescript"],
+  "dependencies": {
+    "include": ["dependencies", "devDependencies"]
+  },
+  "exports": {
+    "include": ["components/**/*.tsx", "utils/**/*.ts"],
+    "exclude": ["pages/_app.tsx", "pages/_document.tsx"]
+  }
+}

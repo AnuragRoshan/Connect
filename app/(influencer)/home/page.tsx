@@ -67,10 +67,15 @@ const ads = [
 
 export default function Component() {
   return (
-    <div className="flex h-screen overflow-y-scroll bg-black text-gray-100 px-4 py-2">
-      <SvgPattern />
-      <MainContent ads={ads} />
-      <RightSidebar />
+    <div className="flex w-[90%] text-gray-100 px-6 py-4 min-h-screen mx-auto">
+      {/* Main content: 70% width on larger screens, full width on small screens */}
+      <div className="w-full lg:w-[70%]">
+        <MainContent ads={ads} />
+      </div>
+      {/* Sidebar: 30% width on larger screens, hidden on small screens */}
+      <div className="hidden lg:block w-[30%]">
+        <RightSidebar />
+      </div>
     </div>
   );
 }

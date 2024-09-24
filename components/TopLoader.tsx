@@ -12,10 +12,10 @@ const TopLoader: React.FC = () => {
     <>
       {isTopLoading && (
         <motion.div
-          className="fixed top-0 left-15 h-1 bg-gradient-to-r from-purple-500 to-purple-800 "
-          initial={{ width: 0 }}
-          animate={{ width: "100%" }}
-          transition={{ duration: 2, ease: "easeIn" }}
+          className="fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-600 z-[9999]"
+          initial={{ scaleX: 0, transformOrigin: "0%" }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 2, ease: "easeInOut" }}
         />
       )}
     </>
