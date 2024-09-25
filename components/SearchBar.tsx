@@ -12,7 +12,6 @@ import {
 import {
   LogOut,
   Home,
-  MessageSquare,
   User,
   Bell,
   Search,

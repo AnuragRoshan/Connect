@@ -1,12 +1,24 @@
 "use client";
+
+import { useState, useEffect } from "react";
 import { MessageSquare, ThumbsUp, User } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import SvgPattern from "@/components/SvgPattern";
+import NotificationPageSkeleton from "@/components/NotificationCardSkeleton";
 
 export default function NotificationPage() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000); // Simulating a 2-second loading time
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const notifications = [
     {
       id: 1,
@@ -54,9 +66,9 @@ export default function NotificationPage() {
       icon: User,
     },
     {
-      id: 5,
+      id: 6,
       avatar: "/placeholder.svg?height=40&width=40",
-      name: "Ethan Hunt",
+      name: "Fiona Gallagher",
       action: "started following you",
       time: "2 days ago",
       unread: false,
@@ -64,10 +76,12 @@ export default function NotificationPage() {
     },
   ];
 
+  if (isLoading) {
+    return <NotificationPageSkeleton />;
+  }
+
   return (
-    <div className="flex h-screen text-gray-100">
-      {/* <SvgPattern /> */}
-      {/* Main content area */}
+    <div className="flex h-screen text-gray-100 bg-gray-700 rounded-xl mx-12 my-8">
       <main className="flex-1 p-6 overflow-hidden">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-3xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-400">
@@ -87,7 +101,7 @@ export default function NotificationPage() {
                 key={notification.id}
                 className={`${
                   notification.unread ? "bg-gray-800" : "bg-black"
-                } border-gray-700 cursor-pointer hover:bg-gray-800 transition-colors duration-200`}
+                } border-gray-700 cursor-pointer hover:bg-gray-600 transition-colors duration-200`}
               >
                 <CardContent className="p-4 flex items-center space-x-4">
                   <Avatar className="w-12 h-12 border-2 border-gray-600">
@@ -110,9 +124,6 @@ export default function NotificationPage() {
                   >
                     <notification.icon className="w-5 h-5" />
                   </Button>
-                  {notification.unread && (
-                    <div className="w-2 h-2 bg-blue-500 rounded-full absolute top-2 right-2" />
-                  )}
                 </CardContent>
               </Card>
             ))}

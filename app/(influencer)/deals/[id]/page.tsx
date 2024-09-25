@@ -4,10 +4,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
-  DollarSign,
-  Calendar,
   CheckCircle,
-  XCircle,
   Clock,
   Instagram,
   Youtube,

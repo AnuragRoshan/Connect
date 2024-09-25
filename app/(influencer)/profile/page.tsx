@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Instagram,
@@ -14,9 +14,7 @@ import {
   Briefcase,
   Edit3,
 } from "lucide-react";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import EditProfileModal from "@/components/EditProfileModal";
-import SvgPattern from "@/components/SvgPattern";
 
 interface SocialMediaStats {
   instagram?: { followers: number; engagement_rate: number };
