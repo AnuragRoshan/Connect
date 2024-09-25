@@ -43,10 +43,10 @@ export default function CombinedSearchBar() {
 
   const menuItems = [
     { icon: Home, label: "Home", route: "/home" },
-    { icon: MessageSquare, label: "Messages", route: "/messages" },
+    // { icon: MessageSquare, label: "Messages", route: "/messages" },
     { icon: User, label: "Profile", route: "/profile" },
     { icon: CirclePlus, label: "New Post", route: "/create" },
-    { icon: BriefcaseBusiness, label: "Applications", route: "/applications" },
+    { icon: BriefcaseBusiness, label: "Deals", route: "/deals" },
     {
       icon: Bell,
       label: "Notifications",
@@ -65,7 +65,7 @@ export default function CombinedSearchBar() {
       router.push(path);
       dispatch(stopTopLoading());
       console.log("Is loading after navigation:", isTopLoading);
-    }, 2000);
+    }, 3000);
   };
 
   const handleSearch = (e: React.FormEvent) => {

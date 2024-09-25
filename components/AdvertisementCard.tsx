@@ -129,7 +129,7 @@ export default function AdvertisementCard({ ad }: AdvertisementCardProps) {
           </motion.div>
         </CardContent>
 
-        <CardFooter className="flex justify-between py-4 bg-gray-900 bg-opacity-50">
+        <CardFooter className="flex justify-start gap-4 py-4 bg-gray-900 bg-opacity-50">
           <Button
             variant="ghost"
             onClick={handleLikeClick}
