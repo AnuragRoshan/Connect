@@ -20,9 +20,28 @@ import {
 } from "lucide-react";
 import ApplicationForm from "@/components/ApplicationForm";
 
+// Define Opportunity type
+interface Opportunity {
+  _id: string;
+  title: string;
+  description: string;
+  platform: string[];
+  budget: number;
+  followerCountRequirement: number;
+  deadline: string;
+  location: string;
+  dealType: string;
+  createdAt: string;
+  category: string;
+  business: {
+    name: string;
+    logo: string;
+  };
+}
+
 export default function SingleOpportunityPage() {
   const [isLoading, setIsLoading] = useState(true);
-  const [opportunity, setOpportunity] = useState<any>(null);
+  const [opportunity, setOpportunity] = useState<Opportunity | null>(null); // Specify Opportunity type or null
   const isDarkMode = useSelector(selectIsDarkMode);
   const params = useParams();
   const { id } = params;
@@ -30,7 +49,7 @@ export default function SingleOpportunityPage() {
   useEffect(() => {
     const timer = setTimeout(() => {
       const foundOpportunity = mockOpportunities.find((opp) => opp._id === id);
-      setOpportunity(foundOpportunity);
+      setOpportunity(foundOpportunity || null); // Handle the case where opportunity isn't found
       setIsLoading(false);
     }, 1000);
 
