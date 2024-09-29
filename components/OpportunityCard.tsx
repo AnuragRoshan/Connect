@@ -15,8 +15,25 @@ import { Calendar, DollarSign, Users, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 
+interface Business {
+  name: string;
+  logo: string;
+}
+
+interface Opportunity {
+  _id: string;
+  business: Business;
+  category: string;
+  title: string;
+  description: string;
+  platform: string[];
+  budget: number;
+  followerCountRequirement: number;
+  deadline: string;
+}
+
 interface OpportunityCardProps {
-  opportunity: any;
+  opportunity: Opportunity;
   isDarkMode: boolean;
 }
 

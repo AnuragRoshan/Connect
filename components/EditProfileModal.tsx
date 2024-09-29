@@ -338,7 +338,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                     {platform}
                   </h4>
                   <div className="grid grid-cols-2 gap-4">
-                    {Object.entries(stats).map(([stat, value]) => (
+                    {Object.entries(stats).map(([stat]) => (
                       <div key={stat}>
                         <label
                           htmlFor={`${platform}-${stat}`}
@@ -391,7 +391,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                     {platform}
                   </h4>
                   <div className="grid grid-cols-2 gap-4">
-                    {Object.entries(rates).map(([rate, value]) => (
+                    {Object.entries(rates).map(([rate]) => (
                       <div key={rate}>
                         <label
                           htmlFor={`${platform}-${rate}`}

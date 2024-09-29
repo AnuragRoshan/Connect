@@ -71,7 +71,7 @@ const ads = [
 export default function Component() {
   const isDarkMode = useSelector(selectIsDarkMode);
 
-  const bgColor = isDarkMode ? "bg-gray-900" : "bg-gray-100";
+  // const bgColor = isDarkMode ? "bg-gray-900" : "bg-gray-100";
   const textColor = isDarkMode ? "text-gray-100" : "text-gray-900";
 
   return (

@@ -42,7 +42,7 @@ export default function AdvertisementCard({
   isDarkMode,
 }: AdvertisementCardProps) {
   const [isLiked, setIsLiked] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
+  const [, setIsHovered] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
 
   const handleLikeClick = () => {

@@ -17,7 +17,7 @@ import {
   Bell,
   Search,
   Settings,
-  CirclePlus,
+  // CirclePlus,
   Menu,
   X,
   BriefcaseBusiness,
@@ -31,7 +31,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger,
+  // DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { motion, AnimatePresence } from "framer-motion";
 

@@ -1,6 +1,6 @@
 "use client";
 import { useSelector } from "react-redux";
-import { toggleTheme, selectIsDarkMode } from "@/redux/slices/themeSlice";
+import { selectIsDarkMode } from "@/redux/slices/themeSlice";
 
 const SvgPattern = () => {
   // Get the current theme from Redux

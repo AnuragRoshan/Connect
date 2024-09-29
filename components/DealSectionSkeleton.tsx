@@ -23,9 +23,8 @@ const DealCardSkeleton = () => (
   </div>
 );
 
-export const DealSectionSkeleton = ({
-  isDarkMode,
-}: {
+export const DealSectionSkeleton = ({}: // isDarkMode,
+{
   isDarkMode: boolean;
 }) => (
   <motion.div
