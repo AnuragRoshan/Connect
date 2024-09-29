@@ -7,12 +7,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Header from "@/components/Navbar";
+import LandingNavbar from "@/components/LandingNavbar";
 import GlassCard from "@/components/GlassCard";
 import ProfileCard from "@/components/ProfileCard";
 import StepCard from "@/components/StepCard";
 import FeatureCard from "@/components/FeatureCard";
-import SvgPattern from "@/components/SvgPattern";
+import SvgPattern from "@/components/LandingSVG";
 import { LogoMarquee } from "@/components/LogoMarquee";
 import { Facebook } from "lucide-react";
 import {
@@ -37,7 +37,7 @@ export default function EnhancedLandingPage() {
     <div className="min-h-screen px-4 bg-black text-white relative overflow-hidden">
       <SvgPattern />
       <div className="relative z-10">
-        <Header />
+        <LandingNavbar />
 
         <main className="container mx-auto px-4">
           <section className="flex flex-col h-[90vh] md:flex-row items-center mb-12">
