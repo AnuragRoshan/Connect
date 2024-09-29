@@ -1,7 +1,7 @@
 "use client ";
 import type { Metadata } from "next";
 import "../globals.css";
-import SearchBar from "@/components/SearchBar";
+import SearchBar from "@/components/Navbar";
 import { ReduxProvider } from "../providers/redux-providers";
 import TopLoader from "@/components/TopLoader";
 import SvgPattern from "@/components/SvgPattern";

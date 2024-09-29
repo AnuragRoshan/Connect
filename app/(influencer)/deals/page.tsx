@@ -2,13 +2,16 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
 import DealSection from "@/components/DealSection";
 import { mockDeals } from "@/constants/deals";
 import { DealSectionSkeleton } from "@/components/DealSectionSkeleton";
+import { selectIsDarkMode } from "@/redux/slices/themeSlice";
 
 export default function EnhancedDealsOverviewPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [expandedDeal, setExpandedDeal] = useState<string | null>(null);
+  const isDarkMode = useSelector(selectIsDarkMode);
 
   // Simulate loading
   useEffect(() => {
@@ -31,27 +34,36 @@ export default function EnhancedDealsOverviewPage() {
     (deal) => deal.status === "Completed"
   );
 
+  const bgColor = isDarkMode ? "bg-gray-800" : "bg-gray-100";
+  const textColor = isDarkMode ? "text-white" : "text-gray-900";
+
   if (isLoading) {
     // Render skeleton when loading
     return (
-      <div className="min-h-screen bg-gray-800 rounded-xl text-white p-8 mx-[3rem] my-[2rem]">
+      <div
+        className={`min-h-screen ${bgColor} rounded-xl ${textColor} p-8 mx-[3rem] my-[2rem]`}
+      >
         <motion.div
-          className="h-12 bg-gray-600 rounded w-64 mb-12"
+          className={`h-12 ${
+            isDarkMode ? "bg-gray-600" : "bg-gray-300"
+          } rounded w-64 mb-12`}
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         ></motion.div>
 
-        <DealSectionSkeleton />
-        <DealSectionSkeleton />
-        <DealSectionSkeleton />
+        <DealSectionSkeleton isDarkMode={isDarkMode} />
+        <DealSectionSkeleton isDarkMode={isDarkMode} />
+        <DealSectionSkeleton isDarkMode={isDarkMode} />
       </div>
     );
   }
 
   // Render actual content after loading
   return (
-    <div className="min-h-screen bg-gray-800 rounded-xl text-white p-8 mx-[3rem] my-[2rem]">
+    <div
+      className={`min-h-screen ${bgColor} rounded-xl ${textColor} p-8 mx-[3rem] my-[2rem]`}
+    >
       <motion.h1
         className="text-4xl font-bold mb-12 text-left"
         initial={{ opacity: 0, y: -20 }}
@@ -66,18 +78,21 @@ export default function EnhancedDealsOverviewPage() {
         deals={appliedDeals}
         toggleDealExpansion={toggleDealExpansion}
         expandedDeal={expandedDeal}
+        isDarkMode={isDarkMode}
       />
       <DealSection
         title="Ongoing Deals"
         deals={ongoingDeals}
         toggleDealExpansion={toggleDealExpansion}
         expandedDeal={expandedDeal}
+        isDarkMode={isDarkMode}
       />
       <DealSection
         title="Completed Deals"
         deals={completedDeals}
         toggleDealExpansion={toggleDealExpansion}
         expandedDeal={expandedDeal}
+        isDarkMode={isDarkMode}
       />
     </div>
   );

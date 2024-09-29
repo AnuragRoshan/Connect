@@ -1,0 +1,62 @@
+export const mockOpportunities = [
+  {
+    _id: "1",
+    title: "Fitness Influencer Needed for Protein Shake Campaign",
+    description:
+      "We're looking for fitness enthusiasts to promote our new line of protein shakes. Create engaging content showcasing how our product fits into your workout routine.",
+    category: "Fitness",
+    budget: 1000,
+    platform: ["Instagram", "TikTok"],
+    contentType: ["Post", "Story", "Reels"],
+    followerCountRequirement: 10000,
+    dealType: "collaboration",
+    business: {
+      _id: "b1",
+      name: "FitFuel Nutrition",
+      logo: "https://www.shutterstock.com/image-vector/circle-line-simple-design-logo-600nw-2174926871.jpg",
+    },
+    deadline: "2024-05-01",
+    location: "Any",
+    createdAt: "2024-03-15",
+  },
+  {
+    _id: "2",
+    title: "Tech Reviewer Wanted for Latest Smartphone",
+    description:
+      "We're seeking tech-savvy influencers to review our cutting-edge smartphone. Provide an in-depth analysis of its features and performance in a video format.",
+    category: "Tech",
+    budget: 1500,
+    platform: ["YouTube"],
+    contentType: ["Video Collaboration"],
+    followerCountRequirement: 50000,
+    dealType: "job",
+    business: {
+      _id: "b2",
+      name: "TechNova",
+      logo: "https://st3.depositphotos.com/43745012/44906/i/450/depositphotos_449066958-stock-photo-financial-accounting-logo-financial-logo.jpg",
+    },
+    deadline: "2024-04-15",
+    location: "Any",
+    createdAt: "2024-03-10",
+  },
+  {
+    _id: "3",
+    title: "Travel Vlogger for Luxury Resort Promotion",
+    description:
+      "We're looking for travel enthusiasts to showcase our luxury resort. Create a series of vlogs highlighting the amenities, local attractions, and overall experience.",
+    category: "Travel",
+    budget: 3000,
+    platform: ["YouTube", "Instagram"],
+    contentType: ["Video Collaboration", "Post", "Story"],
+    followerCountRequirement: 100000,
+    dealType: "collaboration",
+    business: {
+      _id: "b3",
+      name: "Paradise Escapes",
+      logo: "https://cdn.pixabay.com/photo/2015/05/22/19/01/business-779542_1280.jpg",
+    },
+    deadline: "2024-06-30",
+    location: "Bali, Indonesia",
+    createdAt: "2024-03-20",
+  },
+];

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion  } from "framer-motion";
+import { motion } from "framer-motion";
 import { X, Plus } from "lucide-react";
 
 interface SocialMediaStats {
@@ -17,11 +17,12 @@ interface RateCards {
   youtube?: {
     in_video_collaboration_rate: number;
     shorts_rate: number;
-  }; // Include post_rate as optional
+  };
   twitter?: { post_rate: number };
   linkedin?: { reels_rate: number; post_rate: number };
   facebook?: { story_rate: number; reels_rate: number; post_rate: number };
 }
+
 interface PortfolioItem {
   platform: string;
   content_type: string;
@@ -50,11 +51,19 @@ interface Influencer {
   deals?: Deal[];
 }
 
-const EditProfileModal: React.FC<{
+interface EditProfileModalProps {
   influencer: Influencer;
   onClose: () => void;
   onSave: (updatedInfluencer: Influencer) => void;
-}> = ({ influencer, onClose, onSave }) => {
+  isDarkMode: boolean;
+}
+
+const EditProfileModal: React.FC<EditProfileModalProps> = ({
+  influencer,
+  onClose,
+  onSave,
+  isDarkMode,
+}) => {
   const [editedInfluencer, setEditedInfluencer] =
     useState<Influencer>(influencer);
 
@@ -132,6 +141,7 @@ const EditProfileModal: React.FC<{
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSave(editedInfluencer);
+    onClose();
   };
 
   return (
@@ -145,11 +155,32 @@ const EditProfileModal: React.FC<{
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
-        className="bg-gray-800 rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+        className={`${
+          isDarkMode ? "bg-gray-800" : "bg-white"
+        } rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto`}
       >
-        <div className="sticky top-0 bg-gray-800 p-4 flex justify-between items-center border-b border-gray-700">
-          <h2 className="text-2xl font-bold text-white">Edit Profile</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-white">
+        <div
+          className={`sticky top-0 ${
+            isDarkMode ? "bg-gray-800" : "bg-white"
+          } p-4 flex justify-between items-center border-b ${
+            isDarkMode ? "border-gray-700" : "border-gray-200"
+          }`}
+        >
+          <h2
+            className={`text-2xl font-bold ${
+              isDarkMode ? "text-white" : "text-gray-800"
+            }`}
+          >
+            Edit Profile
+          </h2>
+          <button
+            onClick={onClose}
+            className={`${
+              isDarkMode
+                ? "text-gray-400 hover:text-white"
+                : "text-gray-600 hover:text-black"
+            }`}
+          >
             <X size={24} />
           </button>
         </div>
@@ -158,7 +189,9 @@ const EditProfileModal: React.FC<{
             <div>
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-gray-400 mb-1"
+                className={`block text-sm font-medium mb-1 ${
+                  isDarkMode ? "text-gray-400" : "text-gray-700"
+                }`}
               >
                 Name
               </label>
@@ -167,13 +200,19 @@ const EditProfileModal: React.FC<{
                 id="name"
                 value={editedInfluencer.name}
                 onChange={(e) => handleInputChange("name", e.target.value)}
-                className="w-full bg-gray-700 text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className={`w-full rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+                  isDarkMode
+                    ? "bg-gray-700 text-white"
+                    : "bg-gray-100 text-gray-800"
+                }`}
               />
             </div>
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-400 mb-1"
+                className={`block text-sm font-medium mb-1 ${
+                  isDarkMode ? "text-gray-400" : "text-gray-700"
+                }`}
               >
                 Email
               </label>
@@ -182,14 +221,20 @@ const EditProfileModal: React.FC<{
                 id="email"
                 value={editedInfluencer.email}
                 onChange={(e) => handleInputChange("email", e.target.value)}
-                className="w-full bg-gray-700 text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className={`w-full rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+                  isDarkMode
+                    ? "bg-gray-700 text-white"
+                    : "bg-gray-100 text-gray-800"
+                }`}
               />
             </div>
           </div>
           <div>
             <label
               htmlFor="bio"
-              className="block text-sm font-medium text-gray-400 mb-1"
+              className={`block text-sm font-medium mb-1 ${
+                isDarkMode ? "text-gray-400" : "text-gray-700"
+              }`}
             >
               Bio
             </label>
@@ -198,13 +243,19 @@ const EditProfileModal: React.FC<{
               value={editedInfluencer.bio}
               onChange={(e) => handleInputChange("bio", e.target.value)}
               rows={3}
-              className="w-full bg-gray-700 text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className={`w-full rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+                isDarkMode
+                  ? "bg-gray-700 text-white"
+                  : "bg-gray-100 text-gray-800"
+              }`}
             />
           </div>
           <div>
             <label
               htmlFor="about"
-              className="block text-sm font-medium text-gray-400 mb-1"
+              className={`block text-sm font-medium mb-1 ${
+                isDarkMode ? "text-gray-400" : "text-gray-700"
+              }`}
             >
               About
             </label>
@@ -213,13 +264,19 @@ const EditProfileModal: React.FC<{
               value={editedInfluencer.about}
               onChange={(e) => handleInputChange("about", e.target.value)}
               rows={5}
-              className="w-full bg-gray-700 text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className={`w-full rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+                isDarkMode
+                  ? "bg-gray-700 text-white"
+                  : "bg-gray-100 text-gray-800"
+              }`}
             />
           </div>
           <div>
             <label
               htmlFor="location"
-              className="block text-sm font-medium text-gray-400 mb-1"
+              className={`block text-sm font-medium mb-1 ${
+                isDarkMode ? "text-gray-400" : "text-gray-700"
+              }`}
             >
               Location
             </label>
@@ -228,13 +285,19 @@ const EditProfileModal: React.FC<{
               id="location"
               value={editedInfluencer.location}
               onChange={(e) => handleInputChange("location", e.target.value)}
-              className="w-full bg-gray-700 text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className={`w-full rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+                isDarkMode
+                  ? "bg-gray-700 text-white"
+                  : "bg-gray-100 text-gray-800"
+              }`}
             />
           </div>
           <div>
             <label
               htmlFor="category"
-              className="block text-sm font-medium text-gray-400 mb-1"
+              className={`block text-sm font-medium mb-1 ${
+                isDarkMode ? "text-gray-400" : "text-gray-700"
+              }`}
             >
               Categories
             </label>
@@ -248,33 +311,47 @@ const EditProfileModal: React.FC<{
                   e.target.value.split(",").map((cat) => cat.trim())
                 )
               }
-              className="w-full bg-gray-700 text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className={`w-full rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+                isDarkMode
+                  ? "bg-gray-700 text-white"
+                  : "bg-gray-100 text-gray-800"
+              }`}
               placeholder="Enter categories separated by commas"
             />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-white mb-2">
+            <h3
+              className={`text-lg font-semibold mb-2 ${
+                isDarkMode ? "text-white" : "text-gray-800"
+              }`}
+            >
               Social Media Stats
             </h3>
             {Object.entries(editedInfluencer.social_media_stats).map(
               ([platform, stats]) => (
                 <div key={platform} className="mb-4">
-                  <h4 className="text-md font-medium text-gray-300 mb-2 capitalize">
+                  <h4
+                    className={`text-md font-medium mb-2 capitalize ${
+                      isDarkMode ? "text-gray-300" : "text-gray-700"
+                    }`}
+                  >
                     {platform}
                   </h4>
                   <div className="grid grid-cols-2 gap-4">
-                    {Object.entries(stats).map(([stat, ]) => (
+                    {Object.entries(stats).map(([stat, value]) => (
                       <div key={stat}>
                         <label
                           htmlFor={`${platform}-${stat}`}
-                          className="block text-sm font-medium text-gray-400 mb-1 capitalize"
+                          className={`block text-sm font-medium mb-1 capitalize ${
+                            isDarkMode ? "text-gray-400" : "text-gray-600"
+                          }`}
                         >
                           {stat.replace("_", " ")}
                         </label>
                         <input
                           type="number"
                           id={`${platform}-${stat}`}
-                          value={"value"} // Use the actual value from the state
+                          value={"value"}
                           onChange={(e) =>
                             handleSocialMediaStatsChange(
                               platform,
@@ -282,7 +359,11 @@ const EditProfileModal: React.FC<{
                               Number(e.target.value)
                             )
                           }
-                          className="w-full bg-gray-700 text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                          className={`w-full rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+                            isDarkMode
+                              ? "bg-gray-700 text-white"
+                              : "bg-gray-100 text-gray-800"
+                          }`}
                         />
                       </div>
                     ))}
@@ -292,28 +373,38 @@ const EditProfileModal: React.FC<{
             )}
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-white mb-2">
+            <h3
+              className={`text-lg font-semibold mb-2 ${
+                isDarkMode ? "text-white" : "text-gray-800"
+              }`}
+            >
               Rate Cards
             </h3>
             {Object.entries(editedInfluencer.rate_cards).map(
               ([platform, rates]) => (
                 <div key={platform} className="mb-4">
-                  <h4 className="text-md font-medium text-gray-300 mb-2 capitalize">
+                  <h4
+                    className={`text-md font-medium mb-2 capitalize ${
+                      isDarkMode ? "text-gray-300" : "text-gray-700"
+                    }`}
+                  >
                     {platform}
                   </h4>
                   <div className="grid grid-cols-2 gap-4">
-                    {Object.entries(rates).map(([rate, ]) => (
+                    {Object.entries(rates).map(([rate, value]) => (
                       <div key={rate}>
                         <label
                           htmlFor={`${platform}-${rate}`}
-                          className="block text-sm font-medium text-gray-400 mb-1 capitalize"
+                          className={`block text-sm font-medium mb-1 capitalize ${
+                            isDarkMode ? "text-gray-400" : "text-gray-600"
+                          }`}
                         >
                           {rate.replace("_", " ")}
                         </label>
                         <input
                           type="number"
                           id={`${platform}-${rate}`}
-                          value={"value"} // Use the actual value from the state
+                          value={"value"}
                           onChange={(e) =>
                             handleRateCardChange(
                               platform,
@@ -321,7 +412,11 @@ const EditProfileModal: React.FC<{
                               Number(e.target.value)
                             )
                           }
-                          className="w-full bg-gray-700 text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                          className={`w-full rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+                            isDarkMode
+                              ? "bg-gray-700 text-white"
+                              : "bg-gray-100 text-gray-800"
+                          }`}
                         />
                       </div>
                     ))}
@@ -330,26 +425,39 @@ const EditProfileModal: React.FC<{
               )
             )}
           </div>
-
           <div>
-            <h3 className="text-lg font-semibold text-white mb-2">Portfolio</h3>
+            <h3
+              className={`text-lg font-semibold mb-2 ${
+                isDarkMode ? "text-white" : "text-gray-800"
+              }`}
+            >
+              Portfolio
+            </h3>
             {editedInfluencer.portfolio?.map((item, index) => (
               <div
                 key={index}
-                className="mb-4 p-4 bg-gray-700 rounded-lg relative"
+                className={`mb-4 p-4 rounded-lg relative ${
+                  isDarkMode ? "bg-gray-700" : "bg-gray-100"
+                }`}
               >
                 <button
                   type="button"
                   onClick={() => handleRemovePortfolioItem(index)}
-                  className="absolute  top-2 right-2 text-gray-400 hover:text-white"
+                  className={`absolute top-2 right-2 ${
+                    isDarkMode
+                      ? "text-gray-400 hover:text-white"
+                      : "text-gray-600 hover:text-black"
+                  }`}
                 >
                   <X size={20} />
                 </button>
-                <div className="grid grid-cols-2 gap-4 -z-1">
+                <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label
                       htmlFor={`portfolio-${index}-platform`}
-                      className="block text-sm font-medium text-gray-400 mb-1"
+                      className={`block text-sm font-medium mb-1 ${
+                        isDarkMode ? "text-gray-400" : "text-gray-600"
+                      }`}
                     >
                       Platform
                     </label>
@@ -360,13 +468,19 @@ const EditProfileModal: React.FC<{
                       onChange={(e) =>
                         handlePortfolioChange(index, "platform", e.target.value)
                       }
-                      className="w-full bg-gray-600 text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className={`w-full rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+                        isDarkMode
+                          ? "bg-gray-600 text-white"
+                          : "bg-white text-gray-800"
+                      }`}
                     />
                   </div>
                   <div>
                     <label
                       htmlFor={`portfolio-${index}-content-type`}
-                      className="block text-sm font-medium text-gray-400 mb-1"
+                      className={`block text-sm font-medium mb-1 ${
+                        isDarkMode ? "text-gray-400" : "text-gray-600"
+                      }`}
                     >
                       Content Type
                     </label>
@@ -381,13 +495,19 @@ const EditProfileModal: React.FC<{
                           e.target.value
                         )
                       }
-                      className="w-full bg-gray-600 text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className={`w-full rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+                        isDarkMode
+                          ? "bg-gray-600 text-white"
+                          : "bg-white text-gray-800"
+                      }`}
                     />
                   </div>
                   <div className="col-span-2">
                     <label
                       htmlFor={`portfolio-${index}-link`}
-                      className="block text-sm font-medium text-gray-400 mb-1"
+                      className={`block text-sm font-medium mb-1 ${
+                        isDarkMode ? "text-gray-400" : "text-gray-600"
+                      }`}
                     >
                       Link
                     </label>
@@ -398,13 +518,19 @@ const EditProfileModal: React.FC<{
                       onChange={(e) =>
                         handlePortfolioChange(index, "link", e.target.value)
                       }
-                      className="w-full bg-gray-600 text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className={`w-full rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+                        isDarkMode
+                          ? "bg-gray-600 text-white"
+                          : "bg-white text-gray-800"
+                      }`}
                     />
                   </div>
                   <div className="col-span-2">
                     <label
                       htmlFor={`portfolio-${index}-description`}
-                      className="block text-sm font-medium text-gray-400 mb-1"
+                      className={`block text-sm font-medium mb-1 ${
+                        isDarkMode ? "text-gray-400" : "text-gray-600"
+                      }`}
                     >
                       Description
                     </label>
@@ -419,7 +545,11 @@ const EditProfileModal: React.FC<{
                         )
                       }
                       rows={2}
-                      className="w-full bg-gray-600 text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className={`w-full rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+                        isDarkMode
+                          ? "bg-gray-600 text-white"
+                          : "bg-white text-gray-800"
+                      }`}
                     />
                   </div>
                 </div>
@@ -428,7 +558,7 @@ const EditProfileModal: React.FC<{
             <button
               type="button"
               onClick={handleAddPortfolioItem}
-              className="mt-2 w-max flex items-center justify-center w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+              className="mt-2 flex items-center justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
             >
               <Plus size={20} className="mr-2" /> Add Portfolio Item
             </button>
@@ -437,7 +567,11 @@ const EditProfileModal: React.FC<{
             <button
               type="button"
               onClick={onClose}
-              className="py-2 px-4 border border-gray-600 rounded-md shadow-sm text-sm font-medium text-white bg-gray-700 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              className={`py-2 px-4 border rounded-md shadow-sm text-sm font-medium ${
+                isDarkMode
+                  ? "border-gray-600 text-white bg-gray-700 hover:bg-gray-600"
+                  : "border-gray-300 text-gray-700 bg-white hover:bg-gray-50"
+              } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`}
             >
               Cancel
             </button>

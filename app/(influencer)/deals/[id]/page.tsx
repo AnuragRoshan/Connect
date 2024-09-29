@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
 import {
   ArrowLeft,
   CheckCircle,
@@ -10,6 +11,7 @@ import {
   Youtube,
   Twitter,
 } from "lucide-react";
+import { selectIsDarkMode } from "@/redux/slices/themeSlice"; // Adjust the import path as needed
 
 interface Deal {
   _id: string;
@@ -59,6 +61,7 @@ export default function DetailedDealPage() {
   const [deal, setDeal] = useState<Deal | null>(null);
   const [business, setBusiness] = useState<Business | null>(null);
   const [loading, setLoading] = useState(true);
+  const isDarkMode = useSelector(selectIsDarkMode);
 
   useEffect(() => {
     // Simulating API call to fetch deal and business data
@@ -84,8 +87,15 @@ export default function DetailedDealPage() {
     Cancelled: "text-red-400",
   };
 
+  const bgColor = isDarkMode ? "bg-gray-900" : "bg-gray-100";
+  const textColor = isDarkMode ? "text-white" : "text-gray-900";
+  const cardBgColor = isDarkMode ? "bg-gray-800" : "bg-white";
+  const secondaryTextColor = isDarkMode ? "text-gray-400" : "text-gray-600";
+
   return (
-    <div className="min-h-screen w-[60%] mx-auto my-[2rem] p-[1rem] bg-gray-900 text-white rounded-2xl">
+    <div
+      className={`min-h-screen w-[60%] mx-auto my-[2rem] p-[1rem] ${bgColor} ${textColor} rounded-2xl`}
+    >
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -100,7 +110,7 @@ export default function DetailedDealPage() {
           <h1 className="text-3xl font-bold">Deal Details</h1>
         </div>
 
-        <div className="bg-gray-800 rounded-lg p-6 mb-8 shadow-lg">
+        <div className={`${cardBgColor} rounded-lg p-6 mb-8 shadow-lg`}>
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center">
               {loading ? (
@@ -121,7 +131,9 @@ export default function DetailedDealPage() {
                 ) : (
                   <>
                     <h2 className="text-2xl font-semibold">{business?.name}</h2>
-                    <p className="text-gray-400">{deal?.short_description}</p>
+                    <p className={secondaryTextColor}>
+                      {deal?.short_description}
+                    </p>
                   </>
                 )}
               </div>
@@ -143,7 +155,7 @@ export default function DetailedDealPage() {
             {["Platform", "Content Type", "Agreed Rate", "Created At"].map(
               (item, index) => (
                 <div key={index}>
-                  <p className="text-gray-400 mb-1">{item}</p>
+                  <p className={secondaryTextColor + " mb-1"}>{item}</p>
                   {loading ? (
                     <div className="h-6 w-32 bg-gray-700 rounded animate-pulse"></div>
                   ) : (
@@ -155,7 +167,11 @@ export default function DetailedDealPage() {
                         {item === "Platform" && deal?.platform}
                         {item === "Content Type" && deal?.content_type}
                         {item === "Agreed Rate" && (
-                          <span className="text-purple-400 font-semibold">
+                          <span
+                            className={
+                              isDarkMode ? "text-purple-400" : "text-purple-600"
+                            }
+                          >
                             ${deal?.agreed_rate}
                           </span>
                         )}
@@ -171,11 +187,15 @@ export default function DetailedDealPage() {
           </div>
 
           <div>
-            <p className="text-gray-400 mb-1">Contract Terms</p>
+            <p className={secondaryTextColor + " mb-1"}>Contract Terms</p>
             {loading ? (
               <div className="h-24 bg-gray-700 rounded animate-pulse"></div>
             ) : (
-              <p className="bg-gray-700 p-4 rounded-lg">
+              <p
+                className={`${
+                  isDarkMode ? "bg-gray-700" : "bg-gray-200"
+                } p-4 rounded-lg`}
+              >
                 {deal?.contract_terms}
               </p>
             )}
@@ -186,15 +206,15 @@ export default function DetailedDealPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className="bg-gray-800 rounded-lg p-6 shadow-lg"
+          className={`${cardBgColor} rounded-lg p-6 shadow-lg`}
         >
           <h3 className="text-xl font-semibold mb-4">Timeline</h3>
           <div className="space-y-4">
             {loading ? (
               <>
-                <TimelineItemSkeleton />
-                <TimelineItemSkeleton />
-                <TimelineItemSkeleton />
+                <TimelineItemSkeleton isDarkMode={isDarkMode} />
+                <TimelineItemSkeleton isDarkMode={isDarkMode} />
+                <TimelineItemSkeleton isDarkMode={isDarkMode} />
               </>
             ) : (
               <>
@@ -206,6 +226,7 @@ export default function DetailedDealPage() {
                       ? new Date(deal.created_at).toLocaleString()
                       : ""
                   }
+                  isDarkMode={isDarkMode}
                 />
                 <TimelineItem
                   icon={<CheckCircle className="w-5 h-5" />}
@@ -215,12 +236,14 @@ export default function DetailedDealPage() {
                       ? new Date(deal.updated_at).toLocaleString()
                       : ""
                   }
+                  isDarkMode={isDarkMode}
                 />
                 {deal?.status === "Completed" && (
                   <TimelineItem
                     icon={<CheckCircle className="w-5 h-5 text-green-400" />}
                     title="Deal Completed"
                     date="Pending"
+                    isDarkMode={isDarkMode}
                   />
                 )}
               </>
@@ -236,27 +259,41 @@ interface TimelineItemProps {
   icon: React.ReactNode;
   title: string;
   date: string;
+  isDarkMode: boolean;
 }
 
-function TimelineItem({ icon, title, date }: TimelineItemProps) {
+function TimelineItem({ icon, title, date, isDarkMode }: TimelineItemProps) {
+  const iconBgColor = isDarkMode ? "bg-gray-700" : "bg-gray-200";
+  const secondaryTextColor = isDarkMode ? "text-gray-400" : "text-gray-600";
+
   return (
     <div className="flex items-center">
-      <div className="bg-gray-700 rounded-full p-2 mr-4">{icon}</div>
+      <div className={`${iconBgColor} rounded-full p-2 mr-4`}>{icon}</div>
       <div>
         <p className="font-semibold">{title}</p>
-        <p className="text-gray-400 text-sm">{date}</p>
+        <p className={secondaryTextColor + " text-sm"}>{date}</p>
       </div>
     </div>
   );
 }
 
-function TimelineItemSkeleton() {
+interface TimelineItemSkeletonProps {
+  isDarkMode: boolean;
+}
+
+function TimelineItemSkeleton({ isDarkMode }: TimelineItemSkeletonProps) {
+  const skeletonBgColor = isDarkMode ? "bg-gray-700" : "bg-gray-300";
+
   return (
     <div className="flex items-center">
-      <div className="bg-gray-700 rounded-full p-2 mr-4 w-9 h-9"></div>
+      <div className={`${skeletonBgColor} rounded-full p-2 mr-4 w-9 h-9`}></div>
       <div>
-        <div className="h-5 w-32 bg-gray-700 rounded animate-pulse mb-1"></div>
-        <div className="h-4 w-24 bg-gray-700 rounded animate-pulse"></div>
+        <div
+          className={`h-5 w-32 ${skeletonBgColor} rounded animate-pulse mb-1`}
+        ></div>
+        <div
+          className={`h-4 w-24 ${skeletonBgColor} rounded animate-pulse`}
+        ></div>
       </div>
     </div>
   );

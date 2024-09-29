@@ -15,6 +15,8 @@ import {
   Edit3,
 } from "lucide-react";
 import EditProfileModal from "@/components/EditProfileModal";
+import { selectIsDarkMode } from "@/redux/slices/themeSlice";
+import { useSelector } from "react-redux";
 
 interface SocialMediaStats {
   instagram?: { followers: number; engagement_rate: number };
@@ -115,44 +117,59 @@ const influencer: Influencer = {
 
 const InfluencerProfile: React.FC = () => {
   const [showMore, setShowMore] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const isDarkMode = useSelector(selectIsDarkMode);
 
   const displayedText = showMore
     ? influencer.about
     : influencer.about.slice(0, 450);
 
   const handleEditClick = () => {
-    setIsModalOpen(true); // Open the modal when the edit button is clicked
+    setIsModalOpen(true);
   };
 
   const closeModal = () => {
-    setIsModalOpen(false); // Close the modal when needed
+    setIsModalOpen(false);
   };
+
   const handleSave = () => {
     // Update the influencer data
   };
 
   return (
     <div>
-      {/* <SvgPattern /> */}
-      <div className="min-h-screen text-gray-100 p-8">
+      <div
+        className={`min-h-screen ${
+          isDarkMode ? "text-gray-100" : "text-gray-800"
+        } py-8 px-12`}
+      >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="max-w-6xl mx-auto bg-gray-800 rounded-2xl shadow-2xl overflow-hidden relative"
+          className={`max-w-6xl mx-auto ${
+            isDarkMode ? "bg-gray-800" : "bg-white"
+          } rounded-2xl shadow-2xl overflow-hidden relative`}
         >
           <button
-            onClick={handleEditClick} // Open modal on click
-            className="absolute top-4 right-4 text-gray-400 hover:text-white"
+            onClick={handleEditClick}
+            className={`absolute top-4 right-4 ${
+              isDarkMode
+                ? "text-gray-400 hover:text-white"
+                : "text-gray-600 hover:text-black"
+            }`}
           >
             <Edit3 />
           </button>
 
-          <div className="bg-gray-700 p-8 flex flex-col md:flex-row items-center">
-            <div className=" relative md:mr-8 mb-4 md:mb-0">
+          <div
+            className={`${
+              isDarkMode ? "bg-gray-700" : "bg-gray-200"
+            } p-8 flex flex-col md:flex-row items-center`}
+          >
+            <div className="relative md:mr-8 mb-4 md:mb-0">
               <img
-                className=" h-48 w-48 rounded-full object-cover border-4 border-white shadow-lg"
+                className="h-48 w-48 rounded-full object-cover border-4 border-white shadow-lg"
                 src={influencer.profile_image}
                 alt={influencer.name}
               />
@@ -172,22 +189,48 @@ const InfluencerProfile: React.FC = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
-                className="text-4xl font-bold text-white mb-2"
+                className="text-4xl font-bold mb-2"
               >
                 {influencer.name}
               </motion.h1>
-              <p className="text-gray-300 mb-4">
+              <p
+                className={`${
+                  isDarkMode ? "text-gray-300" : "text-gray-600"
+                } mb-4`}
+              >
                 <MapPin className="inline-block mr-2" size={16} />
                 {influencer.location}
               </p>
-              <p className="text-gray-300 max-w-lg">{influencer.bio}</p>
+              <p
+                className={`${
+                  isDarkMode ? "text-gray-300" : "text-gray-600"
+                } max-w-lg`}
+              >
+                {influencer.bio}
+              </p>
             </div>
           </div>
 
           {/* About Section */}
-          <div className="px-8 py-6 bg-gray-750">
-            <h2 className="text-2xl font-semibold text-white mb-4">About</h2>
-            <p className="text-gray-300 p-4 bg-gray-700 rounded-md">
+          <div
+            className={`px-8 py-6 ${
+              isDarkMode ? "bg-gray-750" : "bg-gray-100"
+            }`}
+          >
+            <h2
+              className={`text-2xl font-semibold mb-4 ${
+                isDarkMode ? "text-white" : "text-gray-800"
+              }`}
+            >
+              About
+            </h2>
+            <p
+              className={`${
+                isDarkMode
+                  ? "text-gray-300 bg-gray-700"
+                  : "text-gray-600 bg-white"
+              } p-4 rounded-md`}
+            >
               {displayedText}
               {influencer.about.length > 450 && (
                 <>
@@ -204,8 +247,16 @@ const InfluencerProfile: React.FC = () => {
           </div>
 
           {/* Social Media Stats */}
-          <div className="px-8 py-6 bg-gray-750">
-            <h2 className="text-2xl font-semibold text-white mb-4 flex  items-center">
+          <div
+            className={`px-8 py-6 ${
+              isDarkMode ? "bg-gray-750" : "bg-gray-100"
+            }`}
+          >
+            <h2
+              className={`text-2xl font-semibold mb-4 flex items-center ${
+                isDarkMode ? "text-white" : "text-gray-800"
+              }`}
+            >
               <User className="mr-2 text-purple-400" />
               Social Media Stats
             </h2>
@@ -214,33 +265,44 @@ const InfluencerProfile: React.FC = () => {
                 platform="Instagram"
                 icon={<Instagram className="text-pink-400" />}
                 stats={influencer.social_media_stats.instagram || {}}
+                isDarkMode={isDarkMode}
               />
               <SocialMediaCard
                 platform="YouTube"
                 icon={<Youtube className="text-red-500" />}
                 stats={influencer.social_media_stats.youtube || {}}
+                isDarkMode={isDarkMode}
               />
               <SocialMediaCard
                 platform="Twitter"
                 icon={<Twitter className="text-blue-400" />}
                 stats={influencer.social_media_stats.twitter || {}}
+                isDarkMode={isDarkMode}
               />
               <SocialMediaCard
                 platform="LinkedIn"
                 icon={<Linkedin className="text-blue-600" />}
                 stats={influencer.social_media_stats.linkedin || {}}
+                isDarkMode={isDarkMode}
               />
               <SocialMediaCard
                 platform="Facebook"
                 icon={<Facebook className="text-blue-500" />}
                 stats={influencer.social_media_stats.facebook || {}}
+                isDarkMode={isDarkMode}
               />
             </div>
           </div>
 
           {/* Rate Cards */}
-          <div className="px-8 py-6">
-            <h2 className="text-2xl font-semibold text-white mb-4 flex items-center">
+          <div
+            className={`px-8 py-6 ${isDarkMode ? "bg-gray-800" : "bg-white"}`}
+          >
+            <h2
+              className={`text-2xl font-semibold mb-4 flex items-center ${
+                isDarkMode ? "text-white" : "text-gray-800"
+              }`}
+            >
               <DollarSign className="mr-2 text-green-400" />
               Rate Cards
             </h2>
@@ -252,6 +314,7 @@ const InfluencerProfile: React.FC = () => {
                       key={platform}
                       platform={platform}
                       rates={rates}
+                      isDarkMode={isDarkMode}
                     />
                   )
                 )}
@@ -261,14 +324,26 @@ const InfluencerProfile: React.FC = () => {
 
           {/* Portfolio */}
           {influencer.portfolio && (
-            <div className="px-8 py-6 bg-gray-750">
-              <h2 className="text-2xl font-semibold text-white mb-4 flex items-center">
+            <div
+              className={`px-8 py-6 ${
+                isDarkMode ? "bg-gray-750" : "bg-gray-100"
+              }`}
+            >
+              <h2
+                className={`text-2xl font-semibold mb-4 flex items-center ${
+                  isDarkMode ? "text-white" : "text-gray-800"
+                }`}
+              >
                 <Briefcase className="mr-2 text-yellow-400" />
                 Portfolio
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {influencer.portfolio.map((item, index) => (
-                  <PortfolioItem key={index} item={item} />
+                  <PortfolioItem
+                    key={index}
+                    item={item}
+                    isDarkMode={isDarkMode}
+                  />
                 ))}
               </div>
             </div>
@@ -278,9 +353,10 @@ const InfluencerProfile: React.FC = () => {
       {/* Modal for editing the profile */}
       {isModalOpen && (
         <EditProfileModal
-          influencer={influencer} // Pass the influencer data
-          onClose={closeModal} // Pass the onClose handler
-          onSave={handleSave} // Pass the onSave handler
+          influencer={influencer}
+          onClose={closeModal}
+          onSave={handleSave}
+          isDarkMode={isDarkMode}
         />
       )}
     </div>
@@ -297,36 +373,68 @@ interface SocialMediaCardProps {
   };
 }
 
-const SocialMediaCard: React.FC<SocialMediaCardProps> = ({
-  platform,
-  icon,
-  stats,
-}) => {
+const SocialMediaCard: React.FC<
+  SocialMediaCardProps & { isDarkMode: boolean }
+> = ({ platform, icon, stats, isDarkMode }) => {
   return (
-    <div className="bg-gray-700 p-4 rounded-lg shadow-lg w-[30%]">
+    <div
+      className={`${
+        isDarkMode ? "bg-gray-700" : "bg-white"
+      } p-4 rounded-lg shadow-lg w-[30%]`}
+    >
       <div className="flex items-center mb-2">
         {icon}
-        <h3 className="font-medium text-white ml-2">{platform}</h3>
+        <h3
+          className={`font-medium ml-2 ${
+            isDarkMode ? "text-white" : "text-gray-800"
+          }`}
+        >
+          {platform}
+        </h3>
       </div>
       {stats.followers && (
-        <p className="text-sm text-gray-300">
-          <span className="font-medium text-white">
+        <p
+          className={`text-sm ${
+            isDarkMode ? "text-gray-300" : "text-gray-600"
+          }`}
+        >
+          <span
+            className={`font-medium ${
+              isDarkMode ? "text-white" : "text-gray-800"
+            }`}
+          >
             {stats.followers.toLocaleString()}
           </span>{" "}
           followers
         </p>
       )}
       {stats.engagement_rate && (
-        <p className="text-sm text-gray-300">
-          <span className="font-medium text-white">
+        <p
+          className={`text-sm ${
+            isDarkMode ? "text-gray-300" : "text-gray-600"
+          }`}
+        >
+          <span
+            className={`font-medium ${
+              isDarkMode ? "text-white" : "text-gray-800"
+            }`}
+          >
             {stats.engagement_rate.toFixed(2)}%
           </span>{" "}
           engagement rate
         </p>
       )}
       {stats.average_views && (
-        <p className="text-sm text-gray-300">
-          <span className="font-medium text-white">
+        <p
+          className={`text-sm ${
+            isDarkMode ? "text-gray-300" : "text-gray-600"
+          }`}
+        >
+          <span
+            className={`font-medium ${
+              isDarkMode ? "text-white" : "text-gray-800"
+            }`}
+          >
             {stats.average_views.toLocaleString()}
           </span>{" "}
           average views
@@ -341,14 +449,39 @@ interface RateCardProps {
   rates: Record<string, number>;
 }
 
-const RateCard: React.FC<RateCardProps> = ({ platform, rates }) => (
-  <div className="bg-gray-700 p-4 rounded-lg shadow-lg w-[30%]">
-    <h3 className="font-medium text-white mb-2">{platform}</h3>
+const RateCard: React.FC<RateCardProps & { isDarkMode: boolean }> = ({
+  platform,
+  rates,
+  isDarkMode,
+}) => (
+  <div
+    className={`${
+      isDarkMode ? "bg-gray-700" : "bg-white"
+    } p-4 rounded-lg shadow-lg w-[30%]`}
+  >
+    <h3
+      className={`font-medium mb-2 ${
+        isDarkMode ? "text-white" : "text-gray-800"
+      }`}
+    >
+      {platform}
+    </h3>
     <ul>
       {Object.entries(rates).map(([rateType, rateValue]) => (
-        <li key={rateType} className="text-sm text-gray-300">
-          <span className="font-medium text-white">{rateType}:</span> $
-          {rateValue.toLocaleString()}
+        <li
+          key={rateType}
+          className={`text-sm ${
+            isDarkMode ? "text-gray-300" : "text-gray-600"
+          }`}
+        >
+          <span
+            className={`font-medium ${
+              isDarkMode ? "text-white" : "text-gray-800"
+            }`}
+          >
+            {rateType}:
+          </span>{" "}
+          ${rateValue.toLocaleString()}
         </li>
       ))}
     </ul>
@@ -359,12 +492,46 @@ interface PortfolioItemProps {
   item: PortfolioItem;
 }
 
-const PortfolioItem: React.FC<PortfolioItemProps> = ({ item }) => (
-  <div className="bg-gray-700 p-4 rounded-lg shadow-lg">
-    <h4 className="font-medium text-white mb-2">
+// const PortfolioItem: React.FC<PortfolioItemProps> = ({ item }) => (
+//   <div className="bg-gray-700 p-4 rounded-lg shadow-lg">
+//     <h4 className="font-medium text-white mb-2">
+//       {item.platform} - {item.content_type}
+//     </h4>
+//     <p className="text-sm text-gray-300 mb-2">{item.description}</p>
+//     <a
+//       href={item.link}
+//       target="_blank"
+//       rel="noopener noreferrer"
+//       className="text-blue-400 hover:underline"
+//     >
+//       View Content
+//     </a>
+//   </div>
+// );
+
+const PortfolioItem: React.FC<PortfolioItemProps & { isDarkMode: boolean }> = ({
+  item,
+  isDarkMode,
+}) => (
+  <div
+    className={`${
+      isDarkMode ? "bg-gray-700" : "bg-white"
+    } p-4 rounded-lg shadow-lg`}
+  >
+    <h4
+      className={`font-medium mb-2 ${
+        isDarkMode ? "text-white" : "text-gray-800"
+      }`}
+    >
       {item.platform} - {item.content_type}
     </h4>
-    <p className="text-sm text-gray-300 mb-2">{item.description}</p>
+    <p
+      className={`text-sm mb-2 ${
+        isDarkMode ? "text-gray-300" : "text-gray-600"
+      }`}
+    >
+      {item.description}
+    </p>
     <a
       href={item.link}
       target="_blank"
