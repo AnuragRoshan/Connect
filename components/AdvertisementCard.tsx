@@ -20,6 +20,12 @@ import {
   Bookmark,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import {
+  startTopLoading,
+  stopTopLoading,
+} from "@/redux/slices/Loader/topLoaderSlice";
+import { useDispatch } from "react-redux";
 
 interface Ad {
   id: number;
@@ -44,6 +50,8 @@ export default function AdvertisementCard({
   const [isLiked, setIsLiked] = useState(false);
   const [, setIsHovered] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   const handleLikeClick = () => {
     setIsLiked(!isLiked);
@@ -51,6 +59,17 @@ export default function AdvertisementCard({
 
   const handleSaveClick = () => {
     setIsSaved(!isSaved);
+  };
+
+  const handleCardClick = () => {
+    dispatch(startTopLoading());
+    // console.log("Is loading before navigation:", isTopLoading);
+
+    setTimeout(() => {
+      router.push(`/post/${ad.id}`);
+      dispatch(stopTopLoading());
+      // console.log("Is loading after navigation:", isTopLoading);
+    }, 3000);
   };
 
   const cardBg = isDarkMode
@@ -80,6 +99,7 @@ export default function AdvertisementCard({
         className={`relative ${cardBg} border ${cardBorder} cursor-pointer  rounded-xl overflow-hidden transform transition-all ${cardHoverBorder}`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        onClick={handleCardClick}
       >
         <CardHeader className="pb-4">
           <div className="flex items-center justify-between">

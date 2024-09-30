@@ -1,3 +1,4 @@
+"use client";
 // src/redux/slices/topLoaderSlice.ts
 import { createSlice } from "@reduxjs/toolkit";
 

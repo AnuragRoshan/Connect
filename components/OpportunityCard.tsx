@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react"; // Add useState and useEffect
 import { motion } from "framer-motion";
 import {
   Card,
@@ -11,9 +12,15 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, DollarSign, Users, ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { Calendar, DollarSign, Users, ArrowRight, Clock } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { formatDistanceToNow } from "date-fns"; // Import date-fns
+import { useRouter } from "next/navigation";
+import {
+  startTopLoading,
+  stopTopLoading,
+} from "@/redux/slices/Loader/topLoaderSlice";
+import { useDispatch } from "react-redux";
 
 interface Business {
   name: string;
@@ -30,6 +37,7 @@ interface Opportunity {
   budget: number;
   followerCountRequirement: number;
   deadline: string;
+  createdAt: string;
 }
 
 interface OpportunityCardProps {
@@ -41,6 +49,9 @@ export default function OpportunityCard({
   opportunity,
   isDarkMode,
 }: OpportunityCardProps) {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const [isMounted, setIsMounted] = useState(false); // Track if component is mounted
   const cardBg = isDarkMode ? "bg-gray-800" : "bg-white";
   const cardBorder = isDarkMode ? "border-gray-700" : "border-gray-200";
   const textColor = isDarkMode ? "text-gray-100" : "text-gray-900";
@@ -49,6 +60,27 @@ export default function OpportunityCard({
   const badgeText = isDarkMode ? "text-gray-200" : "text-gray-800";
   const separatorColor = isDarkMode ? "bg-gray-700" : "bg-gray-200";
 
+  // Utility function to format the posted date
+  const formatPostedDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return formatDistanceToNow(date, { addSuffix: true });
+  };
+
+  useEffect(() => {
+    setIsMounted(true); // Set to true after the component mounts
+  }, []);
+
+  const handleApply = () => {
+    if (!isMounted) return; // Ensure router is available only on the client side
+
+    dispatch(startTopLoading());
+
+    setTimeout(() => {
+      router.push(`/apply/${opportunity._id}`);
+      dispatch(stopTopLoading());
+    }, 3000);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -56,7 +88,7 @@ export default function OpportunityCard({
       transition={{ duration: 0.5 }}
     >
       <Card
-        className={`w-[320px] h-[400px] ${cardBg} ${cardBorder} overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col`}
+        className={`w-[340px] h-[440px] ${cardBg} ${cardBorder} overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col`}
       >
         <CardHeader className="pb-2">
           <div className="flex items-center space-x-4">
@@ -117,15 +149,17 @@ export default function OpportunityCard({
                 Deadline: {new Date(opportunity.deadline).toLocaleDateString()}
               </span>
             </div>
+            <div className="flex items-center col-span-2">
+              <Clock className="w-4 h-4 mr-2 text-purple-500" />
+              <span>Posted: {formatPostedDate(opportunity.createdAt)}</span>
+            </div>
           </div>
         </CardContent>
-        <CardFooter className="mt-auto">
-          <Link href={`/apply/${opportunity._id}`} passHref className="w-full">
-            <Button className="w-full group">
-              Apply For Deal
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Button>
-          </Link>
+        <CardFooter className="mt-auto" onClick={handleApply}>
+          <Button className="w-full group">
+            Apply For Deal
+            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-14" />
+          </Button>
         </CardFooter>
       </Card>
     </motion.div>
