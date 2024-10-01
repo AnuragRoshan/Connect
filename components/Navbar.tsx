@@ -24,6 +24,7 @@ import {
   Sun,
   Moon,
   FolderSymlink,
+  MessageSquare,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -50,6 +51,7 @@ export default function CombinedSearchBar() {
     { icon: User, label: "Profile", route: "/profile" },
     { icon: BriefcaseBusiness, label: "Opportunities", route: "/apply" },
     { icon: FolderSymlink, label: "Deals", route: "/deals" },
+    { icon: MessageSquare, label: "Messages", route: "/chats" },
     {
       icon: Bell,
       label: "Notifications",

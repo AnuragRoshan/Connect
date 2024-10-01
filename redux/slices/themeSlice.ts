@@ -7,7 +7,7 @@ const loadThemeFromLocalStorage = (): boolean => {
     const savedTheme = localStorage.getItem("theme");
     return savedTheme === "dark"; // Default to dark mode if "dark" is stored
   }
-  return true; // Default to dark mode if nothing is stored
+  return false; // Default to dark mode if nothing is stored
 };
 
 interface ThemeState {

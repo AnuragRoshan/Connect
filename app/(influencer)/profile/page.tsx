@@ -13,6 +13,7 @@ import {
   User,
   Briefcase,
   Edit3,
+  Link,
 } from "lucide-react";
 import EditProfileModal from "@/components/EditProfileModal";
 import { selectIsDarkMode } from "@/redux/slices/themeSlice";
@@ -337,7 +338,7 @@ const InfluencerProfile: React.FC = () => {
                 <Briefcase className="mr-2 text-yellow-400" />
                 Portfolio
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              <div className="flex flex-col gap-4">
                 {influencer.portfolio.map((item, index) => (
                   <PortfolioItem
                     key={index}
@@ -492,39 +493,44 @@ interface PortfolioItemProps {
   item: PortfolioItem;
 }
 
-// const PortfolioItem: React.FC<PortfolioItemProps> = ({ item }) => (
-//   <div className="bg-gray-700 p-4 rounded-lg shadow-lg">
-//     <h4 className="font-medium text-white mb-2">
-//       {item.platform} - {item.content_type}
-//     </h4>
-//     <p className="text-sm text-gray-300 mb-2">{item.description}</p>
-//     <a
-//       href={item.link}
-//       target="_blank"
-//       rel="noopener noreferrer"
-//       className="text-blue-400 hover:underline"
-//     >
-//       View Content
-//     </a>
-//   </div>
-// );
+interface PortfolioItemProps {
+  item: PortfolioItem;
+  isDarkMode: boolean;
+}
 
-const PortfolioItem: React.FC<PortfolioItemProps & { isDarkMode: boolean }> = ({
-  item,
-  isDarkMode,
-}) => (
+const getPlatformIcon = (platform: string) => {
+  switch (platform.toLowerCase()) {
+    case "instagram":
+      return <Instagram className="text-pink-400" />;
+    case "youtube":
+      return <Youtube className="text-red-500" />;
+    case "twitter":
+      return <Twitter className="text-blue-400" />;
+    case "linkedin":
+      return <Linkedin className="text-blue-600" />;
+    case "facebook":
+      return <Facebook className="text-blue-500" />;
+    default:
+      return <Link className="text-gray-400" />;
+  }
+};
+
+const PortfolioItem: React.FC<PortfolioItemProps> = ({ item, isDarkMode }) => (
   <div
     className={`${
       isDarkMode ? "bg-gray-700" : "bg-white"
-    } p-4 rounded-lg shadow-lg`}
+    } p-4 rounded-lg shadow-lg w-full md:w-[70%]`}
   >
-    <h4
-      className={`font-medium mb-2 ${
-        isDarkMode ? "text-white" : "text-gray-800"
-      }`}
-    >
-      {item.platform} - {item.content_type}
-    </h4>
+    <div className="flex items-center mb-2">
+      {getPlatformIcon(item.platform)}
+      <h4
+        className={`font-medium ml-2 ${
+          isDarkMode ? "text-white" : "text-gray-800"
+        }`}
+      >
+        {item.platform} - {item.content_type}
+      </h4>
+    </div>
     <p
       className={`text-sm mb-2 ${
         isDarkMode ? "text-gray-300" : "text-gray-600"
@@ -536,8 +542,9 @@ const PortfolioItem: React.FC<PortfolioItemProps & { isDarkMode: boolean }> = ({
       href={item.link}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-blue-400 hover:underline"
+      className="text-blue-400 hover:underline flex items-center"
     >
+      <Link className="mr-1" size={16} />
       View Content
     </a>
   </div>
