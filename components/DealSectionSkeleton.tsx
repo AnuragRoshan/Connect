@@ -52,7 +52,7 @@ const DealCardSkeleton = ({ isDarkMode }: { isDarkMode: boolean }) => (
 );
 
 export const DealSectionSkeleton = () => {
-  const isDarkMode = useSelector(selectIsDarkMode);
+  const isDarkMode = useSelector(selectIsDarkMode); // Get dark mode status from Redux
 
   return (
     <motion.div

@@ -88,7 +88,8 @@ export default function OpportunityCard({
       transition={{ duration: 0.5 }}
     >
       <Card
-        className={`w-[340px] h-[440px] ${cardBg} ${cardBorder} overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col`}
+        className={`w-[360px] h-[440px] ${cardBg} ${cardBorder} cursor-pointer overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col`}
+        onClick={handleApply}
       >
         <CardHeader className="pb-2">
           <div className="flex items-center space-x-4">

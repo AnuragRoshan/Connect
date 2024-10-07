@@ -52,9 +52,9 @@ export default function EnhancedDealsOverviewPage() {
           transition={{ duration: 0.5 }}
         ></motion.div>
 
-        <DealSectionSkeleton isDarkMode={isDarkMode} />
-        <DealSectionSkeleton isDarkMode={isDarkMode} />
-        <DealSectionSkeleton isDarkMode={isDarkMode} />
+        <DealSectionSkeleton />
+        <DealSectionSkeleton />
+        <DealSectionSkeleton />
       </div>
     );
   }
